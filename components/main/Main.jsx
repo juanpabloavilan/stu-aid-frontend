@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import Constants from "expo-constants";
 import { Routes, Route } from "react-router-native";
 
@@ -7,31 +7,24 @@ import useThemedStyles from "../../hooks/useThemedStyles";
 import StyledText from "../styled.components/StyledText";
 import StyledView from "../styled.components/StyledView";
 import LoginView from "../login.component/LoginView";
-
+import MyCoursesView from "../mycourses.component/MyCoursesView";
 const Main = () => {
   const styles = useThemedStyles(stylesCallback);
   return (
-    <StyledView style={styles.container}>
-      <StyledText h1 bold style={styles.title}>
-        Stu-aid Main
-      </StyledText>
+    <SafeAreaView style={styles.container}>
       <Routes>
         <Route path="/" element={<SignUpView />} />
         <Route path="/login" element={<LoginView />} />
+        <Route path="/courses" element={<MyCoursesView />} />
       </Routes>
-    </StyledView>
+    </SafeAreaView>
   );
 };
 
 const stylesCallback = (theme) => {
   return StyleSheet.create({
-    title: {
-      position: "absolute",
-      top: 0,
-    },
     container: {
       color: theme.themeTokens.textColor,
-      marginTop: Constants.statusBarHeight,
       flex: 1,
       flexGrow: 1,
       flexShrink: 1,

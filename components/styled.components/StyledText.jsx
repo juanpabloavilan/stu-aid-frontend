@@ -5,8 +5,6 @@ import useThemedStyles from "../../hooks/useThemedStyles";
 const StyledText = ({ style: propStyleObj = {}, children, ...props }) => {
   const styles = useThemedStyles(stylesheetCallback);
   const loadStyles = () => {
-    console.log("rendering styles", children);
-
     let allstyles = [styles.default, propStyleObj];
     allstyles.push(
       Object.keys(props).map((currentProp) => {
@@ -52,6 +50,9 @@ const stylesheetCallback = (theme) =>
     },
     secondaryColor: {
       color: theme.themeTokens.regularIconColor,
+    },
+    error: {
+      color: theme.themeTokens.errorColor,
     },
   });
 
