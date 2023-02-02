@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
-import useThemedStyles from "../../hooks/useThemedStyles";
+import useThemedStyles from "../hooks/useThemedStyles";
 
 const StyledText = ({ style: propStyleObj = {}, children, ...props }) => {
   const styles = useThemedStyles(stylesheetCallback);

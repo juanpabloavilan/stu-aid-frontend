@@ -1,4 +1,4 @@
-import StyledTextInput from "../styled.components/StyledTextInput";
+import StyledTextInput from "../styled_components/StyledTextInput";
 import { useField } from "formik";
 
 const FormikTextInput = ({ name, ...props }) => {

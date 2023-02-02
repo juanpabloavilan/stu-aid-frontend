@@ -1,11 +1,11 @@
 import { Button, StyleSheet } from "react-native";
 import { Formik } from "formik";
-import FormikTextInput from "../formiktextinput.component/FormikTextInput";
-import { signUpSchema } from "../../schemas/user.schemas";
-import StyledView from "../styled.components/StyledView";
-import useSignUpService from "../../hooks/useSignUpService";
+import FormikTextInput from "./FormikTextInput";
+import { signUpSchema } from "../schemas/user.schemas";
+import StyledView from "../styled_components/StyledView";
+import useSignUpService from "../hooks/useSignUpService";
 import { useState } from "react";
-import StyledText from "../styled.components/StyledText";
+import StyledText from "../styled_components/StyledText";
 
 const SignUpForm = () => {
   const [rerender, setRerender] = useState(false);

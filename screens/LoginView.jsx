@@ -1,8 +1,8 @@
 import { Link } from "react-router-native";
 import { StyleSheet } from "react-native";
-import StyledText from "../styled.components/StyledText";
-import StyledView from "../styled.components/StyledView";
-import LoginForm from "../loginform.component/LoginForm";
+import StyledText from "../styled_components/StyledText";
+import StyledView from "../styled_components/StyledView";
+import LoginForm from "../components/LoginForm";
 
 const LoginView = () => {
   return (

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, StyleSheet } from "react-native";
-import useThemedStyles from "../../hooks/useThemedStyles";
+import useThemedStyles from "../hooks/useThemedStyles";
 
 const StyledView = ({ style: propStyle = {}, children, ...props }) => {
   const styles = useThemedStyles(stylesheetCallback);

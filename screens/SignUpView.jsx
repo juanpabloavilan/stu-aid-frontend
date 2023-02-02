@@ -1,6 +1,6 @@
-import StyledText from "../styled.components/StyledText";
-import StyledView from "../styled.components/StyledView";
-import SignUpForm from "../signupform.component/SignUpForm";
+import StyledText from "../styled_components/StyledText";
+import StyledView from "../styled_components/StyledView";
+import SignUpForm from "../components/SignUpForm";
 import { Link } from "react-router-native";
 const SignUpView = () => {
   return (

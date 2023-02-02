@@ -2,12 +2,12 @@ import { StyleSheet, SafeAreaView } from "react-native";
 import Constants from "expo-constants";
 import { Routes, Route } from "react-router-native";
 
-import SignUpView from "../signupview.component/SignUpView";
-import useThemedStyles from "../../hooks/useThemedStyles";
-import StyledText from "../styled.components/StyledText";
-import StyledView from "../styled.components/StyledView";
-import LoginView from "../login.component/LoginView";
-import MyCoursesView from "../mycourses.component/MyCoursesView";
+import SignUpView from "./SignUpView";
+import useThemedStyles from "../hooks/useThemedStyles";
+import StyledText from "../styled_components/StyledText";
+import StyledView from "../styled_components/StyledView";
+import LoginView from "./LoginView";
+import MyCoursesView from "./MyCoursesView";
 const Main = () => {
   const styles = useThemedStyles(stylesCallback);
   return (

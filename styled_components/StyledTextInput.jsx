@@ -1,4 +1,4 @@
-import useThemedStyles from "../../hooks/useThemedStyles";
+import useThemedStyles from "../hooks/useThemedStyles";
 import { TextInput, StyleSheet } from "react-native";
 import StyledText from "./StyledText";
 

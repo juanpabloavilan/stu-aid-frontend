@@ -1,12 +1,13 @@
 import { Formik } from "formik";
 import { Button, StyleSheet } from "react-native";
-import { loginSchema } from "../../schemas/user.schemas";
-import StyledView from "../styled.components/StyledView";
-import FormikTextInput from "../formiktextinput.component/FormikTextInput";
-import StyledText from "../styled.components/StyledText";
-import useLogInService from "../../hooks/useLogInService";
+import { loginSchema } from "../schemas/user.schemas";
+import StyledView from "../styled_components/StyledView";
+import FormikTextInput from "./FormikTextInput";
+import StyledText from "../styled_components/StyledText";
+import useLogInService from "../hooks/useLogInService";
 import { useNavigate } from "react-router-native";
 import { useState, useEffect } from "react";
+
 const LoginForm = () => {
   const { data, error, loading, fetchSignIn } = useLogInService();
   const [isAuthorized, setIsAuthorized] = useState(false);
@@ -28,6 +29,7 @@ const LoginForm = () => {
       redirectToMyCourses();
     }
   }, [isAuthorized]);
+
   return (
     <Formik
       initialValues={initialValues}
