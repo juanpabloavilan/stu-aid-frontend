@@ -2,19 +2,23 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import axios from "axios";
 
 const usePost = ({ url, headers }) => {
-  const postDataRef = useRef({
-    loading: false,
-    data: null,
-    error: null,
-  });
   const [postData, setPostData] = useState({
     loading: false,
     data: null,
     error: null,
   });
 
+  const [isExecuting, setIsExecuting] = useState(false);
+
+  useEffect(() => {
+    if (isExecuting) {
+      console.log(postData);
+    }
+  }, [postData]);
+
   const execute = useCallback(
     async (payload) => {
+      setIsExecuting(true);
       setPostData((prevState) => {
         return {
           loading: true,
@@ -22,9 +26,8 @@ const usePost = ({ url, headers }) => {
         };
       });
 
-      postDataRef.current = { ...postDataRef.current, loading: false };
-
       try {
+        console.log(url, payload);
         const response = await axios.post(url, payload, {
           crossdomain: true,
           headers: {
@@ -37,65 +40,21 @@ const usePost = ({ url, headers }) => {
           data: response.data,
           error: null,
         }));
-        postDataRef.current = {
-          loading: false,
-          data: response.data,
-          error: null,
-        };
       } catch (error) {
         console.log(error);
         setPostData((prevState) => ({
           loading: false,
           data: null,
-          error: error.response.data.message || error.message,
+          error: error.response?.data?.message || error.message,
         }));
-        postDataRef.current = {
-          loading: false,
-          data: null,
-          error: error.response.data.message || error.message,
-        };
       } finally {
-        console.log("finalizooo post hook con", postDataRef.current);
+        console.log("finalizooo post hook con", postData);
+        setIsExecuting(false);
       }
-      // axios
-      //   .post(url, payload, {
-      //     crossdomain: true,
-      //     headers: {
-      //       "Content-Type": "application/json",
-      //     },
-      //   })
-      //   .then((response) => {
-      //     setPostData((prevState) => ({
-      //       loading: false,
-      //       data: response.data,
-      //       error: null,
-      //     }));
-      //     postDataRef.current = {
-      //       loading: false,
-      //       data: response.data,
-      //       error: null,
-      //     };
-      //   })
-      // .catch((error) => {
-      //   console.log(error);
-      //   setPostData((prevState) => ({
-      //     loading: false,
-      //     data: null,
-      //     error: error.response.data.message || error.message,
-      //   }));
-      //   postDataRef.current = {
-      //     loading: false,
-      //     data: null,
-      //     error: error.response.data.message || error.message,
-      //   };
-      // })
-      // .finally(() => {
-      //   console.log("finalizooo post hook con", postDataRef.current);
-      // });
     },
     [url, headers]
   );
 
-  return { ...postData, execute, ref: postDataRef.current };
+  return { ...postData, execute };
 };
 export default usePost;
