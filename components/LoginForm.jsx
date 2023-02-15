@@ -1,12 +1,12 @@
 import { Formik } from "formik";
-import { Button, StyleSheet } from "react-native";
+import { Button, StyleSheet, View, Text } from "react-native";
 import { loginSchema } from "../schemas/user.schemas";
 import StyledView from "../styled_components/StyledView";
 import FormikTextInput from "./FormikTextInput";
 import StyledText from "../styled_components/StyledText";
 import useLogInService from "../hooks/useLogInService";
 import { useNavigate } from "react-router-native";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 const LoginForm = () => {
   const { data, error, loading, fetchSignIn } = useLogInService();
@@ -19,16 +19,6 @@ const LoginForm = () => {
   const onSubmitLogin = async ({ email, password }) => {
     await fetchSignIn({ email, password });
   };
-
-  const redirectToMyCourses = () => {
-    navigate("/courses");
-  };
-
-  useEffect(() => {
-    if (isAuthorized) {
-      redirectToMyCourses();
-    }
-  }, [isAuthorized]);
 
   return (
     <Formik
@@ -45,16 +35,15 @@ const LoginForm = () => {
             secureTextEntry
           />
           <Button onPress={handleSubmit} title="Enviar" />
-          {error && (
-            <StyledText error h4>
-              {error}
-            </StyledText>
-          )}
-          {loading && <StyledText h4>Loading</StyledText>}
-          {data && (
-              <StyledText h4>Login exitoso {JSON.stringify(data)}</StyledText>
-            ) &&
-            setTimeout(() => setIsAuthorized(true), 0)}
+          <View>
+            {error && (
+              <Text error h4>
+                {error}
+              </Text>
+            )}
+            {loading && <Text>Loading</Text>}
+            {data && <Text h4>Login exitoso {JSON.stringify(data)}</Text>}
+          </View>
         </StyledView>
       )}
     </Formik>

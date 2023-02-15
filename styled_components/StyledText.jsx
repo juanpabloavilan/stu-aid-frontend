@@ -18,8 +18,8 @@ const StyledText = ({ style: propStyleObj = {}, children, ...props }) => {
   return <Text style={loadStyles()}>{children}</Text>;
 };
 
-const stylesheetCallback = (theme) =>
-  StyleSheet.create({
+const stylesheetCallback = (theme) => {
+  return StyleSheet.create({
     default: {
       color: theme.themeTokens.textColor,
       fontSize: theme.typography.size.p,
@@ -51,9 +51,34 @@ const stylesheetCallback = (theme) =>
     secondaryColor: {
       color: theme.themeTokens.regularIconColor,
     },
+    success: {
+      color: theme.themeTokens.successColor,
+    },
     error: {
       color: theme.themeTokens.errorColor,
     },
+    black: {
+      color: theme.themeTokens.colors.black,
+    },
+    red: {
+      color: theme.themeTokens.colors.red,
+    },
+    blue: {
+      color: theme.themeTokens.colors.blue,
+    },
+    gray: {
+      color: theme.themeTokens.colors.gray,
+    },
+    yellow: {
+      color: theme.themeTokens.colors.yellow,
+    },
+    white: {
+      color: theme.themeTokens.colors.white,
+    },
+    green: {
+      color: theme.themeTokens.colors.green,
+    },
   });
+};
 
 export default StyledText;

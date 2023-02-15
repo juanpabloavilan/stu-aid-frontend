@@ -1,12 +1,12 @@
 const DARK_THEME_COLORS = {
   black: "#202123",
   blackGray: "#2c2c2e",
+  red: "#de5f58",
   gray: "#a1a1a3",
   blue: "#3f7fe8",
   yellow: "#f1c423",
-  green: "#66be67",
-  red: "#de5f58",
   white: "#e8e8e8",
+  green: "#66be67",
 };
 
 const DARK_THEME = {
