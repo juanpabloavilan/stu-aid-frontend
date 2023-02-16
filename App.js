@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import { NativeRouter } from "react-router-native";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { themeTokens } from "./themesTokens";
@@ -12,7 +11,6 @@ export default function App() {
   return (
     <AuthStorageProvider authStorage={authStorage}>
       <ThemeProvider ThemeTokens={themeTokens}>
-        <StatusBar style="auto" />
         <NativeRouter>
           <Main />
         </NativeRouter>

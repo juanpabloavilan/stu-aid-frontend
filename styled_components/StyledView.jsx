@@ -22,10 +22,8 @@ const StyledView = ({ style: propStyle = {}, children, ...props }) => {
 
 const stylesheetCallback = (theme) =>
   StyleSheet.create({
-    default: {
+    bgDefault: {
       backgroundColor: theme.themeTokens.backgroundColor,
-      paddingHorizontal: 8,
-      paddingVertical: 4,
     },
     bgSecondary: {
       backgroundColor: theme.themeTokens.secondaryBackgroundColor,

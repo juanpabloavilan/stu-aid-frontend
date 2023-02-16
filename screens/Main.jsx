@@ -7,49 +7,61 @@ import HomeView from "./HomeView";
 import MyCoursesView from "./MyCoursesView";
 import QuickFlashcardsView from "./QuickFlashcardsView";
 import CourseView from "./CourseView";
-import CourseDetailsView from "./CourseDetailsView ";
 import { useContext, useEffect, useLayoutEffect } from "react";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
 import { useNavigate } from "react-router-native";
-import axios from "axios";
 import useJwtLogInService from "../hooks/useJwtLogInService";
+import { StatusBar } from "expo-status-bar";
+import { ThemeContext } from "../contexts/ThemeContext";
+import StyledView from "../styled_components/StyledView";
 
 const Main = () => {
   const authStorage = useContext(AuthStorageContext);
-  const styles = useThemedStyles(stylesCallback);
-  const navigate = useNavigate();
   const { loading, error, data, jwtSignIn } = useJwtLogInService();
+  const themeContext = useContext(ThemeContext);
 
   useLayoutEffect(() => {
-    console.log("layout effect");
-  }, []);
-
-  useEffect(() => {
     const hasSessionSaved = async () => {
       const accessToken = await authStorage.getAccessToken();
-      console.log(accessToken);
       if (accessToken) {
         console.log(accessToken);
         await jwtSignIn(accessToken);
-        console.log(data, error, loading);
       }
     };
+    const setTheme = () => {
+      const time = new Date().getHours();
+      if (time >= 5 && time <= 18) {
+        console.log("Setting light mode");
+        themeContext.theme.setCurrentTheme("light");
+      } else {
+        console.log("Setting dark mode");
+        themeContext.theme.setCurrentTheme("dark");
+      }
+    };
+    setTheme();
     hasSessionSaved();
+    console.log(themeContext.theme.currentTheme);
   }, []);
+
+  const styles = useThemedStyles(stylesCallback);
+  console.log(styles);
 
   return (
     <SafeAreaView style={styles.container}>
-      <Routes>
-        <Route path="/" element={<SignUpView />} />
-        <Route path="/login" element={<LoginView />} />
-        <Route path="/home" element={<HomeView />}>
-          <Route index element={<MyCoursesView />} />
-          <Route path="quick-flashcards" element={<QuickFlashcardsView />} />
-        </Route>
-        <Route path="/courses" element={<CourseView />}>
-          <Route path=":courseId" element={<CourseDetailsView />} />
-        </Route>
-      </Routes>
+      <StatusBar
+        style={themeContext.theme.currentTheme === "dark" ? "light" : "dark"}
+      />
+      <StyledView main bgDefault>
+        <Routes>
+          <Route path="/" element={<SignUpView />} />
+          <Route path="/login" element={<LoginView />} />
+          <Route path="/home" element={<HomeView />}>
+            <Route path="courses" element={<MyCoursesView />} />
+            <Route path="quick-flashcards" element={<QuickFlashcardsView />} />
+            <Route path="courses/:courseId" element={<CourseView />} />
+          </Route>
+        </Routes>
+      </StyledView>
     </SafeAreaView>
   );
 };

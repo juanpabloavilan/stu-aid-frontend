@@ -48,6 +48,9 @@ const stylesheetCallback = (theme) => {
     underlined: {
       textDecorationLine: "underline",
     },
+    wrapText: {
+      flexShrink: 1,
+    },
     secondaryColor: {
       color: theme.themeTokens.regularIconColor,
     },
