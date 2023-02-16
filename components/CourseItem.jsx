@@ -13,19 +13,21 @@ const CourseItem = ({ id, name, status, description, priority }) => {
   return (
     <TouchableHighlight
       onPress={() => {
-        navigate(`/courses/${id}`);
+        navigate(`/home/courses/${id}`);
       }}
     >
       <StyledView rounded style={styles.container}>
         <View>
           <CourseIcon name="class" size={30} color={randomColor} />
         </View>
-        <View>
+        <View style={{ flexShrink: 1 }}>
           <StyledText h2 bold>
             {name}
           </StyledText>
           {description && (
-            <StyledText h5>Descripción: {description}</StyledText>
+            <StyledText h5 wrapText>
+              Descripción: {description}
+            </StyledText>
           )}
           {status && <StyledText h5>Estado: {status}</StyledText>}
           {priority && <StyledText h5>Prioridad: {priority}</StyledText>}

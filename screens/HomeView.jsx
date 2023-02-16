@@ -9,12 +9,12 @@ import NavBarItem from "../components/NavBarItem";
 
 const HomeView = () => {
   return (
-    <StyledView main>
+    <StyledView main bgDefault>
       <Header />
       <StyledView>
         <NavBar>
           <NavBarItem to="/home/quick-flashcards" name="Flashcards" />
-          <NavBarItem to="/home" name="Cursos" />
+          <NavBarItem to="/home/courses" name="Cursos" />
         </NavBar>
         <Outlet />
       </StyledView>

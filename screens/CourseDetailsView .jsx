@@ -8,7 +8,6 @@ const CourseDetailsView = () => {
     <StyledView>
       <ScrollView>
         <StyledText bold h2>
-          {" "}
           Course Details View
         </StyledText>
       </ScrollView>

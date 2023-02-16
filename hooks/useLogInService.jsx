@@ -20,7 +20,7 @@ const useLogInService = () => {
   const onSuccessLogin = async () => {
     await authStorage.setAccessToken(data.token);
     axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
-    navigate("/courses");
+    navigate("/home/courses");
   };
 
   const fetchSignIn = async ({ email, password }) => {

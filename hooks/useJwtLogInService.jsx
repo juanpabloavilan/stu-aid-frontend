@@ -31,7 +31,7 @@ const useJwtLogInService = () => {
   const onSuccessLogin = async () => {
     const token = await authStorage.getAccessToken();
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    navigate("/home");
+    navigate("/home/courses");
   };
 
   const onFailedLogin = async () => {

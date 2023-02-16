@@ -4,11 +4,12 @@ import StyledText from "../styled_components/StyledText";
 import useFetchCourses from "../hooks/useFetchCourses";
 import useThemedStyles from "../hooks/useThemedStyles";
 import { StyleSheet, FlatList } from "react-native";
+import { Outlet } from "react-router-native";
 
 const MyCoursesView = () => {
   const { loading, error, data: courses } = useFetchCourses();
   const styles = useThemedStyles(stylesCallback);
-  console.log(courses);
+
   if (loading) {
     return (
       <StyledView>

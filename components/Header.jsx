@@ -13,7 +13,7 @@ import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 const Header = () => {
   const styles = useThemedStyles(stylesheetCallback);
   return (
-    <StyledView style={styles.headerSection}>
+    <StyledView bgDefault style={styles.headerSection}>
       <StyledView>
         <StyledText h1 bold blue>
           Stu-aid
@@ -34,6 +34,7 @@ const stylesheetCallback = (theme) =>
     headerSection: {
       flexDirection: "row",
       justifyContent: "space-between",
+      backgroundColor: "red",
     },
   });
 
