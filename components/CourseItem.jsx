@@ -20,17 +20,10 @@ const CourseItem = ({ id, name, status, description, priority }) => {
         <View>
           <CourseIcon name="class" size={30} color={randomColor} />
         </View>
-        <View style={{ flexShrink: 1 }}>
-          <StyledText h2 bold>
-            {name}
+        <View style={{ flexShrink: 1, alignItems: "center" }}>
+          <StyledText h3 bold>
+            {name.toUpperCase()}
           </StyledText>
-          {description && (
-            <StyledText h5 wrapText>
-              Descripción: {description}
-            </StyledText>
-          )}
-          {status && <StyledText h5>Estado: {status}</StyledText>}
-          {priority && <StyledText h5>Prioridad: {priority}</StyledText>}
         </View>
       </StyledView>
     </TouchableHighlight>

@@ -6,7 +6,7 @@ import useFetchCourseSubjects from "../hooks/useFetchCourseSubjects";
 import useRandomColor from "../hooks/useRandomColor";
 import { useParams } from "react-router-native";
 import SubjectsList from "../components/SubjectsList";
-import CourseItem from "../components/CourseItem";
+import CourseDetailsView from "../components/CourseDetailsView";
 
 const CourseView = () => {
   const { courseId } = useParams();
@@ -20,21 +20,11 @@ const CourseView = () => {
   }
 
   return (
-    <StyledView main>
+    <StyledView>
       {data ? (
         <>
-          {/* <StyledView
-            rounded
-            style={[styles.courseContainer, { backgroundColor: color }]}
-          >
-            
-              {name && <StyledText h2 bold> name </StyledText>}
-            
-            <StyledText p>Descripción: {description}</StyledText>
-            <StyledText p>Prioridad: {priority}</StyledText>
-            <StyledText p>Status: {status}</StyledText>
-          </StyledView> */}
-          <CourseItem {...data} />
+  
+          <CourseDetailsView {...data} />
           <SubjectsList subjectsList={data.subjects} />
         </>
       ) : (

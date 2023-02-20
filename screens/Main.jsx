@@ -18,7 +18,8 @@ import StyledView from "../styled_components/StyledView";
 const Main = () => {
   const authStorage = useContext(AuthStorageContext);
   const { loading, error, data, jwtSignIn } = useJwtLogInService();
-  const themeContext = useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
+  const { currentTheme } = theme;
 
   useLayoutEffect(() => {
     const hasSessionSaved = async () => {
@@ -28,29 +29,30 @@ const Main = () => {
         await jwtSignIn(accessToken);
       }
     };
+    hasSessionSaved();
+  }, []);
+
+  useLayoutEffect(() => {
     const setTheme = () => {
       const time = new Date().getHours();
       if (time >= 5 && time <= 18) {
         console.log("Setting light mode");
-        themeContext.theme.setCurrentTheme("light");
+        theme.setCurrentTheme("light");
       } else {
         console.log("Setting dark mode");
-        themeContext.theme.setCurrentTheme("dark");
+        theme.setCurrentTheme("dark");
       }
     };
     setTheme();
-    hasSessionSaved();
-    console.log(themeContext.theme.currentTheme);
-  }, []);
+    console.log(currentTheme);
+  }, [currentTheme, theme]);
 
   const styles = useThemedStyles(stylesCallback);
   console.log(styles);
 
   return (
     <SafeAreaView style={styles.container}>
-      <StatusBar
-        style={themeContext.theme.currentTheme === "dark" ? "light" : "dark"}
-      />
+      <StatusBar style={currentTheme === "dark" ? "light" : "dark"} />
       <StyledView main bgDefault>
         <Routes>
           <Route path="/" element={<SignUpView />} />

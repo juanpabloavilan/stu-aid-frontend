@@ -18,25 +18,28 @@ const MyCoursesView = () => {
     );
   } else {
     return (
-      <StyledView>
-        <StyledView style={{ padding: 14 }}>
-          {courses && courses.length > 0 ? (
-            <FlatList
-              data={courses}
-              renderItem={({ item }) => <CourseItem {...item} />}
-              keyExtractor={(item) => item.id}
-            />
-          ) : (
-            <StyledText error L bold>
-              No tienes cursos
-            </StyledText>
-          )}
-        </StyledView>
+      <StyledView style={styles.courseListContainer}>
+        {courses && courses.length > 0 ? (
+          <FlatList
+            data={courses}
+            renderItem={({ item }) => <CourseItem {...item} />}
+            keyExtractor={(item) => item.id}
+          />
+        ) : (
+          <StyledText error L bold>
+            No tienes cursos
+          </StyledText>
+        )}
       </StyledView>
     );
   }
 };
 
-const stylesCallback = (theme) => StyleSheet.create({});
+const stylesCallback = (theme) =>
+  StyleSheet.create({
+    courseListContainer: {
+      paddingBottom: 14,
+    },
+  });
 
 export default MyCoursesView;

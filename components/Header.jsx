@@ -32,6 +32,7 @@ const stylesheetCallback = (theme) =>
       color: theme.themeTokens.regularIconColor,
     },
     headerSection: {
+      marginTop: 16,
       flexDirection: "row",
       justifyContent: "space-between",
       backgroundColor: "red",
