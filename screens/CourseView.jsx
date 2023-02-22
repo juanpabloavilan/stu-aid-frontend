@@ -4,7 +4,7 @@ import StyledText from "../styled_components/StyledText";
 import useThemedStyles from "../hooks/useThemedStyles";
 import useFetchCourseSubjects from "../hooks/useFetchCourseSubjects";
 import useRandomColor from "../hooks/useRandomColor";
-import { useParams } from "react-router-native";
+// import { useParams } from "react-router-native";
 import SubjectsList from "../components/SubjectsList";
 import CourseDetailsView from "../components/CourseDetailsView";
 
@@ -23,7 +23,6 @@ const CourseView = () => {
     <StyledView>
       {data ? (
         <>
-  
           <CourseDetailsView {...data} />
           <SubjectsList subjectsList={data.subjects} />
         </>

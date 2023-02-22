@@ -1,20 +1,21 @@
-import { NativeRouter } from "react-router-native";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { themeTokens } from "./themesTokens";
 import Main from "./screens/Main";
 import AuthStorageProvider from "./contexts/AuthStorageContext";
 import AuthStorage from "./utils/AuthStorage";
+import { NavigationContainer } from "@react-navigation/native";
+import NavigationTab from "./navigation/NavigationStack";
 
 const authStorage = new AuthStorage("auth");
 
 export default function App() {
   return (
-    <AuthStorageProvider authStorage={authStorage}>
-      <ThemeProvider ThemeTokens={themeTokens}>
-        <NativeRouter>
+    <NavigationContainer>
+      <AuthStorageProvider authStorage={authStorage}>
+        <ThemeProvider ThemeTokens={themeTokens}>
           <Main />
-        </NativeRouter>
-      </ThemeProvider>
-    </AuthStorageProvider>
+        </ThemeProvider>
+      </AuthStorageProvider>
+    </NavigationContainer>
   );
 }

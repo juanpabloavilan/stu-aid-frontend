@@ -1,4 +1,3 @@
-import { Link, useLocation } from "react-router-native";
 import useThemedStyles from "../hooks/useThemedStyles";
 import { StyleSheet } from "react-native";
 import StyledText from "../styled_components/StyledText";

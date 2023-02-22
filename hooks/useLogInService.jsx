@@ -3,7 +3,7 @@ import usePost from "./usePost";
 import Constants from "expo-constants";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
 import axios from "axios";
-import { useNavigate } from "react-router-native";
+import { useNavigation } from "@react-navigation/native";
 
 const useLogInService = () => {
   const authStorage = useContext(AuthStorageContext);

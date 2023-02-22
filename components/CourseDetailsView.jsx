@@ -5,8 +5,8 @@ import useThemedStyles from "../hooks/useThemedStyles";
 import StartSessionIcon from "react-native-vector-icons/FontAwesome5";
 import useRandomColor from "../hooks/useRandomColor";
 import EditCourseIcon from "react-native-vector-icons/FontAwesome";
-import { useNavigate } from "react-router-native";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const CourseDetailsView = ({ id, name, status, description, priority }) => {
   const styles = useThemedStyles(styleSheetsCallback);

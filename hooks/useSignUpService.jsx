@@ -1,10 +1,10 @@
 import Constants from "expo-constants";
 import usePost from "./usePost";
-import { useNavigate } from "react-router-native";
+import { useNavigation } from "@react-navigation/native";
 
 const useSignUpService = () => {
   const API_URL = `${Constants.expoConfig.extra.apiURL}/users/`;
-  const navigate = useNavigate();
+  const navigation = useNavigation();
 
   const { data, loading, error, execute, ref } = usePost({ url: API_URL });
 
@@ -13,7 +13,7 @@ const useSignUpService = () => {
       await execute(payload);
       if (error) return;
       setTimeout(() => {
-        navigate("/login");
+        navigation.navigate("Login");
       }, 4000);
     } catch (err) {
       console.log(err);

@@ -2,13 +2,13 @@ import { useEffect, useContext, useState } from "react";
 import usePost from "./usePost";
 import Constants from "expo-constants";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
-import { useNavigate } from "react-router-native";
+import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 
 const useJwtLogInService = () => {
   const URL = `${Constants.expoConfig.extra.apiURL}/auth/jwt-login`;
   const { loading, data, error, execute } = usePost({ url: URL });
-  const navigate = useNavigate();
+  const navigation = useNavigation();
   const authStorage = useContext(AuthStorageContext);
 
   useEffect(() => {
@@ -31,13 +31,15 @@ const useJwtLogInService = () => {
   const onSuccessLogin = async () => {
     const token = await authStorage.getAccessToken();
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    navigate("/home/courses");
+    navigation.navigate("Courses");
+    console.log("going to Courses");
   };
 
   const onFailedLogin = async () => {
     await authStorage.removeAccessToken();
     delete axios.defaults.headers.common["Authorization"];
-    navigate("/login");
+    navigation.navigate("Login");
+    console.log("Going to login");
   };
   return { loading, data, error, jwtSignIn };
 };

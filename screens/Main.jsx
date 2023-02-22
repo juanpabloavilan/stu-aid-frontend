@@ -1,5 +1,5 @@
 import { StyleSheet, SafeAreaView } from "react-native";
-import { Routes, Route } from "react-router-native";
+// import { Routes, Route } from "react-router-native";
 import SignUpView from "./SignUpView";
 import useThemedStyles from "../hooks/useThemedStyles";
 import LoginView from "./LoginView";
@@ -9,11 +9,12 @@ import QuickFlashcardsView from "./QuickFlashcardsView";
 import CourseView from "./CourseView";
 import { useContext, useEffect, useLayoutEffect } from "react";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
-import { useNavigate } from "react-router-native";
 import useJwtLogInService from "../hooks/useJwtLogInService";
 import { StatusBar } from "expo-status-bar";
 import { ThemeContext } from "../contexts/ThemeContext";
 import StyledView from "../styled_components/StyledView";
+import StyledText from "../styled_components/StyledText";
+import NavigationTab from "../navigation/NavigationStack";
 
 const Main = () => {
   const authStorage = useContext(AuthStorageContext);
@@ -24,6 +25,7 @@ const Main = () => {
   useLayoutEffect(() => {
     const hasSessionSaved = async () => {
       const accessToken = await authStorage.getAccessToken();
+      console.log(accessToken, "AccessToken");
       if (accessToken) {
         console.log(accessToken);
         await jwtSignIn(accessToken);
@@ -54,7 +56,7 @@ const Main = () => {
     <SafeAreaView style={styles.container}>
       <StatusBar style={currentTheme === "dark" ? "light" : "dark"} />
       <StyledView main bgDefault>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<SignUpView />} />
           <Route path="/login" element={<LoginView />} />
           <Route path="/home" element={<HomeView />}>
@@ -62,7 +64,11 @@ const Main = () => {
             <Route path="quick-flashcards" element={<QuickFlashcardsView />} />
             <Route path="courses/:courseId" element={<CourseView />} />
           </Route>
-        </Routes>
+        </Routes> */}
+        <StyledText L bold blue>
+          Main
+        </StyledText>
+        <NavigationTab />
       </StyledView>
     </SafeAreaView>
   );

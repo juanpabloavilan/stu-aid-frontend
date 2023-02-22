@@ -5,8 +5,8 @@ import StyledView from "../styled_components/StyledView";
 import FormikTextInput from "./FormikTextInput";
 import StyledText from "../styled_components/StyledText";
 import useLogInService from "../hooks/useLogInService";
-import { useNavigate } from "react-router-native";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginForm = () => {
   const { data, error, loading, fetchSignIn } = useLogInService();

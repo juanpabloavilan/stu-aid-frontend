@@ -4,7 +4,7 @@ import StyledText from "../styled_components/StyledText";
 import useThemedStyles from "../hooks/useThemedStyles";
 import CourseIcon from "react-native-vector-icons/MaterialIcons";
 import useRandomColor from "../hooks/useRandomColor";
-import { useNavigate } from "react-router-native";
+import { useNavigation } from "@react-navigation/native";
 
 const CourseItem = ({ id, name, status, description, priority }) => {
   const styles = useThemedStyles(styleSheetsCallback);

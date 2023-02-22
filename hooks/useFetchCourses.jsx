@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
 import useGet from "./useGet";
 import { useState } from "react";
-import { useNavigate } from "react-router-native";
+import { useNavigation } from "@react-navigation/native";
 
 /**
  * TODO:
