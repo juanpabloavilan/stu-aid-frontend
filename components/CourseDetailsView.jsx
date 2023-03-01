@@ -12,7 +12,7 @@ const CourseDetailsView = ({ id, name, status, description, priority }) => {
   const styles = useThemedStyles(styleSheetsCallback);
   const randomColor = useRandomColor(id);
   const [showEditIcon, setShowEditIcon] = useState(false);
-  const navigate = useNavigate();
+  const navigation = useNavigation();
   return (
     <TouchableHighlight
       onLongPress={() => {
@@ -24,7 +24,7 @@ const CourseDetailsView = ({ id, name, status, description, priority }) => {
           <TouchableHighlight
             style={styles.editIcon}
             onPress={() => {
-              navigate("/home/courses");
+              navigation.navigate("Home");
             }}
           >
             <EditCourseIcon name="edit" size={20} />

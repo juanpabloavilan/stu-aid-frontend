@@ -1,4 +1,4 @@
-import { View, StyleSheet, TouchableHighlight } from "react-native";
+import { View, StyleSheet, TouchableWithoutFeedback } from "react-native";
 import StyledView from "../styled_components/StyledView";
 import StyledText from "../styled_components/StyledText";
 import useThemedStyles from "../hooks/useThemedStyles";
@@ -9,24 +9,24 @@ import { useNavigation } from "@react-navigation/native";
 const CourseItem = ({ id, name, status, description, priority }) => {
   const styles = useThemedStyles(styleSheetsCallback);
   const randomColor = useRandomColor(id);
-  const navigate = useNavigate();
+  const navigation = useNavigation();
   return (
-    <TouchableHighlight
+    <TouchableWithoutFeedback
       onPress={() => {
-        navigate(`/home/courses/${id}`);
+        navigation.navigate("CourseView", { id });
       }}
     >
-      <StyledView rounded style={styles.container}>
-        <View>
-          <CourseIcon name="class" size={30} color={randomColor} />
-        </View>
-        <View style={{ flexShrink: 1, alignItems: "center" }}>
-          <StyledText h3 bold>
-            {name.toUpperCase()}
-          </StyledText>
-        </View>
-      </StyledView>
-    </TouchableHighlight>
+      <View>
+        <StyledView rounded style={styles.container}>
+          <View>
+            <CourseIcon name="class" size={30} color={randomColor} />
+          </View>
+          <View style={{ flexShrink: 1, alignItems: "center" }}>
+            <StyledText h5>{name.toUpperCase()}</StyledText>
+          </View>
+        </StyledView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 
