@@ -4,7 +4,7 @@ import Main from "./screens/Main";
 import AuthStorageProvider from "./contexts/AuthStorageContext";
 import AuthStorage from "./utils/AuthStorage";
 import { NavigationContainer } from "@react-navigation/native";
-import NavigationTab from "./navigation/NavigationStack";
+import NavigationTab from "./navigation/NavigationTab";
 
 const authStorage = new AuthStorage("auth");
 

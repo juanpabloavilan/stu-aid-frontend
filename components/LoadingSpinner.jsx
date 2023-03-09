@@ -5,7 +5,7 @@ import StyledText from "../styled_components/StyledText";
 
 const LoadingSpinner = () => {
   return (
-    <StyledView main justifyCenter alignCenter>
+    <StyledView main paddingDefault justifyCenter alignCenter>
       <ActivityIndicator size="large" />
       <StyledText>Cargando</StyledText>
     </StyledView>

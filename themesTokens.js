@@ -22,7 +22,7 @@ const DARK_THEME = {
 };
 
 const LIGHT_THEME_COLORS = {
-  white: "f9f9f9",
+  white: "#f9f9f9",
   whiteGray: "#eceef4",
   red: "#f18c8e",
   gray: "#73777f",

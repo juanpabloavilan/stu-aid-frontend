@@ -31,7 +31,7 @@ const useJwtLogInService = () => {
   const onSuccessLogin = async () => {
     const token = await authStorage.getAccessToken();
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-    navigation.navigate("Courses");
+    navigation.navigate("Home");
     console.log("going to Courses");
   };
 

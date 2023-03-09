@@ -5,17 +5,13 @@ import useThemedStyles from "../hooks/useThemedStyles";
 import Header from "../components/Header";
 import NavBar from "../components/NavBar";
 import NavBarItem from "../components/NavBarItem";
+import NavigationTab from "../navigation/NavigationTab";
 
 const HomeView = () => {
   return (
-    <StyledView main bgDefault>
+    <StyledView bgDefault style={{ flex: 1, flexShrink: 1 }}>
       <Header />
-      <StyledView>
-        {/* <NavBar>
-          <NavBarItem to="/home/quick-flashcards" name="Flashcards" />
-          <NavBarItem to="/home/courses" name="Cursos" />
-        </NavBar> */}
-      </StyledView>
+      <NavigationTab />
     </StyledView>
   );
 };

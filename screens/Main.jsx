@@ -1,36 +1,30 @@
 import { StyleSheet, SafeAreaView } from "react-native";
-// import { Routes, Route } from "react-router-native";
-import SignUpView from "./SignUpView";
 import useThemedStyles from "../hooks/useThemedStyles";
-import LoginView from "./LoginView";
-import HomeView from "./HomeView";
-import MyCoursesView from "./MyCoursesView";
-import QuickFlashcardsView from "./QuickFlashcardsView";
-import CourseView from "./CourseView";
 import { useContext, useEffect, useLayoutEffect } from "react";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
 import useJwtLogInService from "../hooks/useJwtLogInService";
 import { StatusBar } from "expo-status-bar";
 import { ThemeContext } from "../contexts/ThemeContext";
-import StyledView from "../styled_components/StyledView";
-import StyledText from "../styled_components/StyledText";
-import NavigationTab from "../navigation/NavigationStack";
+import { useNavigation } from "@react-navigation/native";
+import NavigationStack from "../navigation/NavigationStack";
 
 const Main = () => {
   const authStorage = useContext(AuthStorageContext);
   const { loading, error, data, jwtSignIn } = useJwtLogInService();
   const { theme } = useContext(ThemeContext);
   const { currentTheme } = theme;
+  const navigation = useNavigation();
 
   useLayoutEffect(() => {
     const hasSessionSaved = async () => {
+      //await authStorage.removeAccessToken();
       const accessToken = await authStorage.getAccessToken();
-      console.log(accessToken, "AccessToken");
       if (accessToken) {
         console.log(accessToken);
         await jwtSignIn(accessToken);
       }
     };
+    //navigation.navigate("Login");
     hasSessionSaved();
   }, []);
 
@@ -55,21 +49,7 @@ const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar style={currentTheme === "dark" ? "light" : "dark"} />
-      <StyledView main bgDefault>
-        {/* <Routes>
-          <Route path="/" element={<SignUpView />} />
-          <Route path="/login" element={<LoginView />} />
-          <Route path="/home" element={<HomeView />}>
-            <Route path="courses" element={<MyCoursesView />} />
-            <Route path="quick-flashcards" element={<QuickFlashcardsView />} />
-            <Route path="courses/:courseId" element={<CourseView />} />
-          </Route>
-        </Routes> */}
-        <StyledText L bold blue>
-          Main
-        </StyledText>
-        <NavigationTab />
-      </StyledView>
+      <NavigationStack />
     </SafeAreaView>
   );
 };

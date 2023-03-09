@@ -23,34 +23,53 @@ const CourseList = ({ courses }) => {
       data: courses?.filter(({ status }) => status !== "active"),
     },
   ];
+
   return (
-    <SectionList
-      style={styles.courseListContainer}
-      sections={courseSections}
-      keyExtractor={(item) => item.id}
-      renderItem={({ item }) => <CourseItem {...item} />}
-      renderSectionHeader={({ section: { title } }) => (
-        <View style={styles.sectionTitle}>
-          <StyledText h4>{title}</StyledText>
-        </View>
-      )}
-      SectionSeparatorComponent={() => <View style={styles.separator} />}
-      ListFooterComponent={
-        <AddButton
-          style={styles.addCourseButton}
-          onPress={() => navigation.navigate("AddCourseModal")}
-          text="Añadir curso"
-        />
-      }
-    />
+    <StyledView main>
+      <SectionList
+        showsHorizontalScrollIndicator={false}
+        ListHeaderComponent={
+          <View>
+            <StyledText h5 gray underlined>
+              Mantén presionada la clase para poderla editar o eliminar
+            </StyledText>
+          </View>
+        }
+        sections={courseSections}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => <CourseItem {...item} />}
+        renderSectionHeader={({ section: { title } }) => (
+          <View style={styles.sectionTitle}>
+            <StyledText h4>{title}</StyledText>
+          </View>
+        )}
+        SectionSeparatorComponent={() => <View style={styles.separator} />}
+        ListEmptyComponent={
+          <StyledView paddingDefault>
+            <StyledText error h4 bold>
+              No tienes cursos
+            </StyledText>
+          </StyledView>
+        }
+        ListFooterComponent={
+          <>
+            <AddButton
+              style={styles.addCourseButton}
+              onPress={() => navigation.navigate("AddCourseModal")}
+              text="Añadir curso"
+            />
+          </>
+        }
+      />
+    </StyledView>
   );
 };
 
 const stylesCallback = (theme) =>
   StyleSheet.create({
     courseListContainer: {
-      paddingVertical: 20,
-      paddingHorizontal: 10,
+      paddingVertical: 16,
+      paddingHorizontal: 12,
     },
     addCourseButton: {
       marginTop: 28,
@@ -65,6 +84,7 @@ const stylesCallback = (theme) =>
       marginVertical: 10,
     },
     sectionTitle: {
+      marginTop: 10,
       backgroundColor: theme.themeTokens.secondaryBackgroundColor,
       borderRadius: 8,
       paddingVertical: 10,

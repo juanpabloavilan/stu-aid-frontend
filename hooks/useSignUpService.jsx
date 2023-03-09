@@ -6,7 +6,7 @@ const useSignUpService = () => {
   const API_URL = `${Constants.expoConfig.extra.apiURL}/users/`;
   const navigation = useNavigation();
 
-  const { data, loading, error, execute, ref } = usePost({ url: API_URL });
+  const { data, loading, error, execute } = usePost({ url: API_URL });
 
   const fetchSignUp = async (payload) => {
     try {

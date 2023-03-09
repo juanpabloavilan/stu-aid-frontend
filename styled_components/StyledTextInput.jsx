@@ -15,7 +15,9 @@ const StyledTextInput = ({
       <TextInput
         style={inputStyle}
         {...props}
-        placeholderTextColor={styles.currentTheme.theme.themeTokens.textColor}
+        placeholderTextColor={
+          styles.currentTheme.theme.themeTokens.regularIconColor
+        }
       />
       {showError && (
         <StyledText error style={styles.errorMessage}>
@@ -29,15 +31,16 @@ const StyledTextInput = ({
 const stylesCallback = (theme) =>
   StyleSheet.create({
     txtInput: {
-      placeholderTextColor: theme.themeTokens.textColor,
-      paddingVertical: 5,
-      paddingHorizontal: 5,
+      placeholderTextColor: theme.themeTokens.regularIconColor,
+      paddingVertical: 8,
+      paddingHorizontal: 12,
       marginVertical: 10,
       color: theme.themeTokens.textColor,
       borderRadius: 5,
       borderStyle: "solid",
       borderWidth: 2,
-      borderColor: theme.themeTokens.colors.green,
+      borderColor: theme.themeTokens.regularIconColor,
+      flexShrink: 1,
     },
     error: {
       borderColor: theme.themeTokens.errorColor,

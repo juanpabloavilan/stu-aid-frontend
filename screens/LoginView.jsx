@@ -1,12 +1,14 @@
 // import { Link } from "react-router-native";
-import { StyleSheet } from "react-native";
+import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
 import StyledText from "../styled_components/StyledText";
 import StyledView from "../styled_components/StyledView";
 import LoginForm from "../components/LoginForm";
+import { useNavigation } from "@react-navigation/native";
 
 const LoginView = () => {
+  const navigation = useNavigation();
   return (
-    <StyledView main justifyCenter alignCenter>
+    <StyledView main paddingDefault justifyCenter alignCenter>
       <StyledView
         style={styles.container}
         justifyCenter
@@ -18,11 +20,13 @@ const LoginView = () => {
           Iniciar sesión
         </StyledText>
         <LoginForm />
-        <Link to="/">
-          <StyledText h5 secondaryColor underlined>
-            Registrarse
-          </StyledText>
-        </Link>
+        <TouchableWithoutFeedback onPress={() => navigation.navigate("SignUp")}>
+          <View>
+            <StyledText h5 secondaryColor underlined>
+              Registrarse
+            </StyledText>
+          </View>
+        </TouchableWithoutFeedback>
       </StyledView>
     </StyledView>
   );

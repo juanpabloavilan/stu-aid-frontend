@@ -22,6 +22,10 @@ const StyledView = ({ style: propStyle = {}, children, ...props }) => {
 
 const stylesheetCallback = (theme) =>
   StyleSheet.create({
+    paddingDefault: {
+      paddingHorizontal: 16,
+      paddingVertical: 24,
+    },
     bgDefault: {
       backgroundColor: theme.themeTokens.backgroundColor,
     },
@@ -46,8 +50,6 @@ const stylesheetCallback = (theme) =>
       flexGrow: 1,
       flexShrink: 1,
       backgroundColor: theme.themeTokens.backgroundColor,
-      paddingHorizontal: 16,
-      paddingVertical: 24,
     },
     success: {
       backgroundColor: theme.themeTokens.successColor,

@@ -8,8 +8,8 @@ import { useNavigation } from "@react-navigation/native";
 const useLogInService = () => {
   const authStorage = useContext(AuthStorageContext);
   const API_URL = `${Constants.expoConfig.extra.apiURL}/auth/login`;
-  const { loading, data, error, execute, ref } = usePost({ url: API_URL });
-  const navigate = useNavigate();
+  const { loading, data, error, execute } = usePost({ url: API_URL });
+  const navigation = useNavigation();
 
   useEffect(() => {
     if (data && !error) {
@@ -20,7 +20,7 @@ const useLogInService = () => {
   const onSuccessLogin = async () => {
     await authStorage.setAccessToken(data.token);
     axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
-    navigate("/home/courses");
+    navigation.navigate("Home");
   };
 
   const fetchSignIn = async ({ email, password }) => {

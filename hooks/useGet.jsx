@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import axios from "axios";
 
 const useGet = ({ url, headers, params }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [data, setData] = useState(null);
+  const [isExecuting, setIsExecuting] = useState(false);
 
   useEffect(() => {
-    execute();
-  }, []);
+    if (isExecuting) {
+      console.log({ data, loading, error });
+    }
+  }, [data, loading, error]);
 
-  const execute = async () => {
+  const execute = useCallback(async () => {
+    console.log("executing fun");
+    setIsExecuting(true);
+    setLoading(true);
     try {
-      setLoading(true);
       const response = await axios.get(url, {
+        crossdomain: true,
         params,
         headers,
       });
@@ -26,9 +32,10 @@ const useGet = ({ url, headers, params }) => {
     } finally {
       setLoading(false);
     }
-  };
+    setIsExecuting(false);
+  }, [url, headers, params]);
 
-  return { loading, error, data };
+  return { loading, error, data, execute };
 };
 
 export default useGet;
