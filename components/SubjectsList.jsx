@@ -11,31 +11,29 @@ const SubjectsList = ({ subjectsList }) => {
   const styles = useThemedStyles(stylesCallback);
 
   return (
-    <StyledView main style={styles.container}>
-      <FlatList
-        showsVerticalScrollIndicator={false}
-        showsHorizontalScrollIndicator={false}
-        data={subjectsList}
-        renderItem={({ item }) => <SubjectItem {...item} />}
-        keyExtractor={(item) => item.id}
-        ListFooterComponent={
-          <>
-            <AddButton
-              style={styles.addCourseButton}
-              onPress={() => navigation.navigate("New subject")}
-              text="Añadir tema"
-            />
-          </>
-        }
-        ListEmptyComponent={
-          <StyledView style={styles.emptyComponent}>
-            <StyledText h4 red bold>
-              No tienes temas
-            </StyledText>
-          </StyledView>
-        }
-      />
-    </StyledView>
+    <FlatList
+      showsVerticalScrollIndicator={false}
+      showsHorizontalScrollIndicator={false}
+      data={subjectsList}
+      renderItem={({ item }) => <SubjectItem {...item} />}
+      keyExtractor={(item) => item.id}
+      ListFooterComponent={
+        <>
+          <AddButton
+            style={styles.addCourseButton}
+            onPress={() => navigation.navigate("New subject")}
+            text="Añadir tema"
+          />
+        </>
+      }
+      ListEmptyComponent={
+        <StyledView style={styles.emptyComponent}>
+          <StyledText h4 red bold>
+            No tienes temas
+          </StyledText>
+        </StyledView>
+      }
+    />
   );
 };
 

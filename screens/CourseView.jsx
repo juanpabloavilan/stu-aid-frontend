@@ -1,4 +1,4 @@
-import { StyleSheet, ActivityIndicator } from "react-native";
+import { StyleSheet, ActivityIndicator, Text } from "react-native";
 import StyledView from "../styled_components/StyledView";
 import StyledText from "../styled_components/StyledText";
 import useThemedStyles from "../hooks/useThemedStyles";
@@ -37,15 +37,14 @@ const CourseView = ({ route, navigation }) => {
           goBack={navigation.goBack}
           color={styles.goBackIcon.color}
         />
-        <StyledView>
-          {loading && <LoadingSpinner />}
-          {data && (
-            <StyledView paddingDefault>
-              <CourseDetailsView {...data} />
-              <SubjectsList subjectsList={data.subjects} />
-            </StyledView>
-          )}
-        </StyledView>
+
+        {loading && <LoadingSpinner />}
+        {data && (
+          <StyledView paddingDefault>
+            <CourseDetailsView {...data} />
+            <SubjectsList subjectsList={data.subjects} />
+          </StyledView>
+        )}
       </StyledView>
     </StyledView>
   );

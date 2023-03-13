@@ -8,6 +8,7 @@ import StyledView from "../styled_components/StyledView";
 const SwitchInput = ({
   name,
   placeholder,
+  initialValue,
   trueValue,
   falseValue,
   trueLabel,
@@ -17,15 +18,20 @@ const SwitchInput = ({
   const [field, meta, helpers] = useField(name);
   const showError = meta.error && meta.touched;
   const styles = useThemedStyles(stylesCallback);
-  const [isEnabled, setIsEnabled] = useState(false);
+  const [isEnabled, setIsEnabled] = useState();
 
   useEffect(() => {
-    helpers.setValue(falseValue);
+    setIsEnabled(
+      initialValue ? (initialValue === trueValue ? true : false) : false
+    );
   }, []);
 
+  useEffect(() => {
+    helpers.setValue(isEnabled ? trueValue : falseValue);
+  }, [isEnabled]);
+
   const toggleSwitch = () => {
-    setIsEnabled((prevState) => !prevState);
-    helpers.setValue(isEnabled ? falseValue : trueValue);
+    setIsEnabled(!isEnabled);
   };
   return (
     <>
@@ -33,13 +39,11 @@ const SwitchInput = ({
         <StyledText gray>{placeholder}</StyledText>
         <View style={{ alignItems: "flex-end" }}>
           <Switch
-            style={{ flex: 1 }}
             trackColor={{
               false: styles.false.color,
               true: styles.true.color,
             }}
             thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
-            ios_backgroundColor="#3e3e3e"
             onValueChange={toggleSwitch}
             value={isEnabled}
           />

@@ -21,7 +21,7 @@ const SubjectFlashcardsNotes = ({
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
       {({ handleSubmit }) => (
-        <StyledView main paddingDefault>
+        <StyledView main>
           <Pressable onPress={handleSubmit}>
             <StyledView rounded blue style={styles.button}>
               <StyledText bold white>

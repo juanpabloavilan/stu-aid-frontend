@@ -44,6 +44,7 @@ const CourseForm = ({
             <FormikTextInput name="priority" placeholder="Prioridad" />
             <SwitchInput
               placeholder="Estatus"
+              initialValue={initialValues?.status}
               name="status"
               trueValue="active"
               falseValue="dismissed"

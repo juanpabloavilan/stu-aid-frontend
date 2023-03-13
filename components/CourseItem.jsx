@@ -20,8 +20,6 @@ const CourseItem = ({ id, name, status, description, priority }) => {
   const randomColor = useRandomColor(id);
   const navigation = useNavigation();
   const [showOptions, setShowOptions] = useState(false);
-  // const [showEditCourseModal, setShowEditCourseModal] = useState(false);
-  // const [showDeleteCourseModal, setShowDeleteCourseModal] = useState(false);
 
   const onEditModal = () => {
     navigation.navigate("EditCourseModal", { id });

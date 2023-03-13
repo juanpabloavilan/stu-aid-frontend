@@ -14,7 +14,7 @@ const NewSubjectView = () => {
   const { data, loading, error, execute } = usePostSubjectFlashcards();
 
   return (
-    <StyledView main bgDefault paddingDefault>
+    <StyledView main bgDefault paddingDefault style={styles.container}>
       <GoBackIcon
         goBack={() => navigation.goBack()}
         color={styles.goBackIcon.color}
@@ -44,6 +44,9 @@ export default NewSubjectView;
 
 const stylesCallback = (theme) =>
   StyleSheet.create({
+    container: {
+      paddingTop: 40,
+    },
     goBackIcon: {
       color: theme.themeTokens.regularIconColor,
     },
