@@ -39,7 +39,6 @@ const DeleteCourseModal = () => {
         style={{
           alignItems: "center",
           justifyContent: "center",
-          flex: 1,
         }}
       >
         <StyledText h3 bold blue>
