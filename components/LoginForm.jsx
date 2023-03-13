@@ -2,8 +2,10 @@ import { Formik } from "formik";
 import { Button, StyleSheet, View, Text } from "react-native";
 import { loginSchema } from "../schemas/user.schemas";
 import StyledView from "../styled_components/StyledView";
+import StyledText from "../styled_components/StyledText";
 import FormikTextInput from "./FormikTextInput";
 import useLogInService from "../hooks/useLogInService";
+import LoadingSpinner from "./LoadingSpinner";
 
 const LoginForm = () => {
   const { data, error, loading, fetchSignIn } = useLogInService();
@@ -32,12 +34,12 @@ const LoginForm = () => {
           <Button onPress={handleSubmit} title="Enviar" />
           <View>
             {error && (
-              <Text error h4>
+              <StyledText error h4>
                 {error}
-              </Text>
+              </StyledText>
             )}
-            {loading && <Text>Loading</Text>}
-            {data && <Text h4>Login exitoso</Text>}
+            {loading && <LoadingSpinner />}
+            {data && <StyledText h4>Login exitoso</StyledText>}
           </View>
         </StyledView>
       )}
