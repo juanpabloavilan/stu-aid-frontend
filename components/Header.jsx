@@ -39,7 +39,7 @@ const stylesheetCallback = (theme) =>
       paddingBottom: 16,
       borderBottomColor: theme.themeTokens.secondaryBackgroundColor,
       borderBottomWidth: 1,
-      marginBottom: 16,
+      marginBottom: 4,
     },
   });
 

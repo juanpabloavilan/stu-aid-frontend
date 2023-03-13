@@ -22,7 +22,7 @@ const MyCoursesView = () => {
   useFocusEffect(callback);
 
   return (
-    <StyledView main paddingDefault style={styles.courseListContainer}>
+    <StyledView main style={styles.courseListContainer}>
       <StyledText h2 bold>
         Mis cursos
       </StyledText>
@@ -43,7 +43,7 @@ const MyCoursesView = () => {
 const stylesCallback = (theme) =>
   StyleSheet.create({
     courseListContainer: {
-      paddingBottom: 14,
+      padding: 14,
     },
     addCourseButton: {
       marginTop: 28,
