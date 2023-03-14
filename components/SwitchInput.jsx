@@ -36,7 +36,9 @@ const SwitchInput = ({
   return (
     <>
       <View style={styles.switchContainer}>
-        <StyledText gray>{placeholder}</StyledText>
+        <StyledText gray h5>
+          {placeholder}
+        </StyledText>
         <View style={{ alignItems: "flex-end" }}>
           <Switch
             trackColor={{
