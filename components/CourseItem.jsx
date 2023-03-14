@@ -13,7 +13,6 @@ import { useNavigation } from "@react-navigation/native";
 import { useState } from "react";
 import EditCourseIcon from "react-native-vector-icons/FontAwesome";
 import DeleteCourseIcon from "react-native-vector-icons/MaterialCommunityIcons";
-import EditCourseModal from "../screens/EditCourseModal";
 
 const CourseItem = ({ id, name, status, description, priority }) => {
   const styles = useThemedStyles(styleSheetsCallback);
