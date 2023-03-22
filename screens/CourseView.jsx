@@ -42,7 +42,7 @@ const CourseView = ({ route, navigation }) => {
         {data && (
           <StyledView paddingDefault>
             <CourseDetailsView {...data} />
-            <SubjectsList subjectsList={data.subjects} />
+            <SubjectsList subjectsList={data.subjects} courseId={id} />
           </StyledView>
         )}
       </StyledView>

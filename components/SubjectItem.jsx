@@ -24,7 +24,7 @@ const SubjectItem = ({ id, courseId, name, status }) => {
   return (
     <Pressable
       onPress={() => {
-        navigation.navigate("Subject", { id });
+        navigation.navigate("Subject", { subjectId: id, courseId: courseId });
       }}
       onLongPress={() => {
         setShowOptions(true);

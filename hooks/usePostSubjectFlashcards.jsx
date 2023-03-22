@@ -1,8 +1,8 @@
 import Constants from "expo-constants";
 import usePost from "./usePost";
 
-const usePostSubjectFlashcards = () => {
-  const API_URL = `${Constants.expoConfig.extra.apiUrl}/subjects`;
+const usePostSubjectFlashcards = (courseId) => {
+  const API_URL = `${Constants.expoConfig.extra.apiURL}/courses/${courseId}/subjects`;
   const { data, error, loading, execute } = usePost({ url: API_URL });
 
   return { data, error, loading, execute };

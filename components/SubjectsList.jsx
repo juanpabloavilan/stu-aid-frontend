@@ -6,7 +6,7 @@ import AddButton from "./AddButton";
 import { useNavigation } from "@react-navigation/native";
 import useThemedStyles from "../hooks/useThemedStyles";
 
-const SubjectsList = ({ subjectsList }) => {
+const SubjectsList = ({ subjectsList, courseId }) => {
   const navigation = useNavigation();
   const styles = useThemedStyles(stylesCallback);
 
@@ -21,7 +21,7 @@ const SubjectsList = ({ subjectsList }) => {
         <>
           <AddButton
             style={styles.addCourseButton}
-            onPress={() => navigation.navigate("New subject")}
+            onPress={() => navigation.navigate("New subject", { courseId })}
             text="Añadir tema"
           />
         </>
