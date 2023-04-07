@@ -1,6 +1,6 @@
-import StyledText from "../styled_components/StyledText";
-import StyledView from "../styled_components/StyledView";
-import SignUpForm from "../components/SignUpForm";
+import StyledText from "../../styled_components/StyledText";
+import StyledView from "../../styled_components/StyledView";
+import SignUpForm from "../../components/SignUpForm";
 import { Button, TouchableWithoutFeedback, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 

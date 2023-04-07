@@ -12,7 +12,7 @@ const usePost = ({ url, headers }) => {
 
   useEffect(() => {
     if (isExecuting) {
-      console.log(postData);
+      console.log(postData, url);
     }
   }, [postData]);
 
@@ -48,7 +48,6 @@ const usePost = ({ url, headers }) => {
           error: error.response?.data?.message || error.message,
         }));
       } finally {
-        console.log("finalizooo post hook con", postData);
         setIsExecuting(false);
       }
     },

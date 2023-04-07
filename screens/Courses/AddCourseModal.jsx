@@ -1,14 +1,14 @@
 import { StyleSheet, Image } from "react-native";
 import React from "react";
-import StyledView from "../styled_components/StyledView";
-import useThemedStyles from "../hooks/useThemedStyles";
-import StyledText from "../styled_components/StyledText";
+import StyledView from "../../styled_components/StyledView";
+import useThemedStyles from "../../hooks/useThemedStyles";
+import StyledText from "../../styled_components/StyledText";
 import { SafeAreaView } from "react-native-safe-area-context";
-import GoBackIcon from "../components/GoBackIcon";
+import GoBackIcon from "../../components/GoBackIcon";
 import { useNavigation } from "@react-navigation/native";
-import CourseForm from "../components/CourseForm";
-import { postCourseSchema } from "../schemas/course.schemas";
-import usePostCourse from "../hooks/usePostCourse";
+import CourseForm from "../../components/CourseForm";
+import { postCourseSchema } from "../../schemas/course.schemas";
+import usePostCourse from "../../hooks/usePostCourse";
 
 const AddCourseModal = () => {
   const styles = useThemedStyles(stylesCallback);
@@ -30,7 +30,10 @@ const AddCourseModal = () => {
         color={styles.goBackIcon.color}
       />
       <StyledView style={styles.modal}>
-        <Image style={styles.bookIcon} source={require("../assets/book.png")} />
+        <Image
+          style={styles.bookIcon}
+          source={require("../../assets/book.png")}
+        />
         <StyledText h3 bold>
           Añadir curso
         </StyledText>

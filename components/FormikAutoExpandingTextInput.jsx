@@ -1,24 +1,46 @@
 import { useField } from "formik";
-import AutoExpandingTextInput from "./AutoExpandingTextInput";
-import { StyleSheet } from "react-native";
+import { useRef, useState, useEffect } from "react";
+import { StyleSheet, TextInput } from "react-native";
+import StyledText from "../styled_components/StyledText";
 
 const FormikAutoExpandingTextInput = ({
-  style,
   name,
   textInputStyles,
   ...restOfProps
 }) => {
   const [field, meta, helpers] = useField(name);
   const showError = meta.error && meta.touched;
+  const [height, setHeight] = useState(30);
+  const heightRef = useRef();
+
+  useEffect(() => {
+    if (height > heightRef) {
+      heightRef.current = currentHeight;
+    }
+  }, [height]);
   return (
     <>
-      <AutoExpandingTextInput
-        style={textInputStyles}
-        initialValue={field.value}
+      <TextInput
+        multiline={true}
+        onContentSizeChange={(e) => {
+          let currentHeight = e.nativeEvent.contentSize.height;
+          setHeight(currentHeight);
+        }}
+        style={[
+          textInputStyles,
+          {
+            height: Math.max(heightRef.current, height),
+            backgroundColor: "cyan",
+          },
+        ]}
+        value={field.value}
         onChangeText={(newValue) => helpers.setValue(newValue)}
         onBlur={() => helpers.setTouched(true)}
         {...restOfProps}
       />
+
+      <StyledText>height: {height}</StyledText>
+      <StyledText>heightRef: {heightRef.current}</StyledText>
       {showError && (
         <StyledText error style={styles.errorMessage}>
           {meta.error}

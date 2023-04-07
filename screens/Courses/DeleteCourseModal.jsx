@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import React, { useEffect } from "react";
-import StyledModalScreen from "../components/StyledModalScreen";
+import StyledModalScreen from "../../components/StyledModalScreen";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import StyledText from "../styled_components/StyledText";
-import StyledView from "../styled_components/StyledView";
-import useThemedStyles from "../hooks/useThemedStyles";
-import useDeleteCourse from "../hooks/useDeleteCourse";
-import LoadingSpinner from "../components/LoadingSpinner";
+import StyledText from "../../styled_components/StyledText";
+import StyledView from "../../styled_components/StyledView";
+import useThemedStyles from "../../hooks/useThemedStyles";
+import useDeleteCourse from "../../hooks/useDeleteCourse";
+import LoadingSpinner from "../../components/LoadingSpinner";
 
 const DeleteCourseModal = () => {
   const route = useRoute();

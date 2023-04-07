@@ -1,10 +1,10 @@
-import StyledView from "../styled_components/StyledView";
-import StyledText from "../styled_components/StyledText";
-import useFetchCourses from "../hooks/useFetchCourses";
-import useThemedStyles from "../hooks/useThemedStyles";
+import StyledView from "../../styled_components/StyledView";
+import StyledText from "../../styled_components/StyledText";
+import useFetchCourses from "../../hooks/useFetchCourses";
+import useThemedStyles from "../../hooks/useThemedStyles";
 import { StyleSheet } from "react-native";
-import LoadingSpinner from "../components/LoadingSpinner";
-import CourseList from "../components/CourseList";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import CourseList from "../../components/CourseList";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback } from "react";
 

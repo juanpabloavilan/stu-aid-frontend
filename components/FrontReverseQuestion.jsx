@@ -1,59 +1,94 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import React, { useRef, useState } from "react";
-import AutoExpandingTextInput from "./AutoExpandingTextInput";
+import { StyleSheet, Text, View, TextInput, Pressable } from "react-native";
+import React, { useState } from "react";
 import useThemedStyles from "../hooks/useThemedStyles";
-import DoneIcon from "react-native-vector-icons/Ionicons";
 import { Formik } from "formik";
 import { FrontReverseSchema } from "../schemas/flashcard.schema";
 import FormikAutoExpandingTextInput from "./FormikAutoExpandingTextInput";
+import StyledButton from "./StyledButton";
+import FlashcardOptions from "./FlashcardOptions";
+import { Dimensions } from "react-native";
+import StyledView from "../styled_components/StyledView";
+import { FLASHCARD_ACTIONS } from "../reducers/flashcards.reducer";
+import TextEditor from "./TextEditor";
 
-const FrontReverseQuestion = ({ setFlashcards, ...data }) => {
+/**
+ * TODO:
+ * 0. Implementar Redux global state.
+ * 1. Crear los modals de flashcards.
+ * 2. Implementar RichTextEditor
+ * 3. Editar formularios enviar cambios a la api
+ *
+ */
+const FrontReverseQuestion = ({ dispatch, selected, setSelected, ...data }) => {
   const { front, back } = data.payload;
+  const { id, pos } = data;
   const styles = useThemedStyles(stylesCallback);
-  const [isFocused, setIsFocused] = useState(false);
 
-  const onBlurValidation = () => {
-    console.log("Form is blurring");
+  //console.log(data);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    const { id, pos, front, back } = data;
+    dispatch({
+      type: FLASHCARD_ACTIONS.editFlashcard,
+      payload: {
+        id,
+        pos,
+        front,
+        back,
+      },
+    });
+    setSelected(-1);
+  };
+
+  const onDelete = () => {
+    console.log(data);
+    dispatch({
+      type: FLASHCARD_ACTIONS.removeFlashcard,
+      payload: {
+        id,
+        pos,
+      },
+    });
+    setSelected(-1);
   };
 
   return (
     <Formik
-      validateOnBlur={true}
-      initialValues={data}
+      onSubmit={onSubmit}
+      initialValues={{ id: data.id, pos: data.pos, ...data.payload }}
       validationSchema={FrontReverseSchema}
     >
-      {({ handleBlur }) => {
-        return (
-          <View>
-            <FormikAutoExpandingTextInput
-              name="front"
-              textInputStyles={styles.textInput}
-              initialValue={front}
-              placeholder="Front"
-              placeholderTextColor={styles.placeholder.color}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
-            />
+      {({ handleSubmit }) => (
+        <StyledView>
+          <FormikAutoExpandingTextInput
+            name="front"
+            textInputStyles={styles.textInput}
+            initialValue={front}
+            placeholder="Front"
+            placeholderTextColor={styles.placeholder.color}
+            onFocus={() => setSelected(id)}
+          />
 
-            <FormikAutoExpandingTextInput
-              name="back"
-              textInputStyles={styles.textInput}
-              initialValue={back}
-              placeholder="Back"
-              placeholderTextColor={styles.placeholder.color}
-              onFocus={() => setIsFocused(true)}
-              onBlur={() => setIsFocused(false)}
+          <FormikAutoExpandingTextInput
+            name="back"
+            textInputStyles={styles.textInput}
+            initialValue={back}
+            placeholder="Back"
+            placeholderTextColor={styles.placeholder.color}
+            onFocus={() => setSelected(id)}
+          />
+
+          {selected && (
+            <FlashcardOptions
+              handleDone={handleSubmit}
+              handleDelete={onDelete}
             />
-            {isFocused && (
-              <DoneIcon
-                name="checkmark-circle"
-                style={styles.button}
-                size={40}
-              />
-            )}
-          </View>
-        );
-      }}
+          )}
+          {!selected && <View style={{ height: 30 }}></View>}
+          {/* <TextEditor /> */}
+        </StyledView>
+      )}
     </Formik>
   );
 };
@@ -73,9 +108,5 @@ const stylesCallback = (theme) =>
     },
     placeholder: {
       color: theme.themeTokens.regularIconColor,
-    },
-    button: {
-      color: theme.themeTokens.colors.green,
-      alignSelf: "flex-end",
     },
   });

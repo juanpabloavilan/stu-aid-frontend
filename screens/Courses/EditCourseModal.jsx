@@ -1,15 +1,15 @@
 import { StyleSheet, View, TouchableWithoutFeedback } from "react-native";
 import React, { useEffect } from "react";
-import StyledModal from "../components/StyledModal";
-import StyledView from "../styled_components/StyledView";
-import StyledText from "../styled_components/StyledText";
-import CourseForm from "../components/CourseForm";
-import useFetchCourseSubjects from "../hooks/useFetchCourseSubjects";
-import LoadingSpinner from "../components/LoadingSpinner";
-import { editCourseSchema } from "../schemas/course.schemas";
-import usePutCourse from "../hooks/usePutCourse";
+import StyledModal from "../../components/StyledModal";
+import StyledView from "../../styled_components/StyledView";
+import StyledText from "../../styled_components/StyledText";
+import CourseForm from "../../components/CourseForm";
+import useFetchCourseSubjects from "../../hooks/useFetchCourseSubjects";
+import LoadingSpinner from "../../components/LoadingSpinner";
+import { editCourseSchema } from "../../schemas/course.schemas";
+import usePutCourse from "../../hooks/usePutCourse";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import StyledModalScreen from "../components/StyledModalScreen";
+import StyledModalScreen from "../../components/StyledModalScreen";
 
 const EditCourseModal = () => {
   const route = useRoute();

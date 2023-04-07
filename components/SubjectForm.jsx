@@ -11,7 +11,6 @@ import { upsertSubject } from "../schemas/subject.schema";
 
 const SubjectForm = ({ initialValues, onSubmit, data, error, loading }) => {
   const styles = useThemedStyles(stylesCallback);
-  console.log(initialValues);
 
   return (
     <Formik
@@ -22,7 +21,7 @@ const SubjectForm = ({ initialValues, onSubmit, data, error, loading }) => {
     >
       {({ handleSubmit }) => (
         <StyledView main>
-          <Pressable onPress={handleSubmit}>
+          <Pressable onPress={(values) => handleSubmit(values)}>
             <StyledView rounded blue style={styles.button}>
               <StyledText bold white>
                 Guardar
@@ -44,19 +43,15 @@ const SubjectForm = ({ initialValues, onSubmit, data, error, loading }) => {
             textInputStyles={styles.inputStyle}
           />
 
-          <FormikTextInput
-            name="createdAt"
-            placeholder="Fecha de creación"
-            textInputStyles={styles.inputStyle}
-            editable={false}
-          />
+          <StyledText h5 gray style={styles.flashcardsTextInput}>
+            {"Fecha de creación: " +
+              new Date(initialValues.createdAt).toLocaleString()}
+          </StyledText>
 
-          <FormikTextInput
-            name="updatedAt"
-            placeholder="Fecha de actualización"
-            textInputStyles={styles.inputStyle}
-            editable={false}
-          />
+          <StyledText h5 gray style={styles.flashcardsTextInput}>
+            {"Fecha de modificación: " +
+              new Date(initialValues.updatedAt).toLocaleString()}
+          </StyledText>
 
           <SwitchInput
             name="status"

@@ -1,20 +1,10 @@
-import {
-  Animated,
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  useWindowDimensions,
-} from "react-native";
+import { View, Pressable, StyleSheet } from "react-native";
 
-import { useCardAnimation } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 import useThemedStyles from "../hooks/useThemedStyles";
 import StyledView from "../styled_components/StyledView";
 
 const StyledModalScreen = ({ children }) => {
-  const { height } = useWindowDimensions();
-  const { current } = useCardAnimation();
   const navigation = useNavigation();
   const styles = useThemedStyles(stylesCallback);
 

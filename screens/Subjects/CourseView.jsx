@@ -1,15 +1,15 @@
 import { StyleSheet, ActivityIndicator, Text } from "react-native";
-import StyledView from "../styled_components/StyledView";
-import StyledText from "../styled_components/StyledText";
-import useThemedStyles from "../hooks/useThemedStyles";
-import useFetchCourseSubjects from "../hooks/useFetchCourseSubjects";
-import useRandomColor from "../hooks/useRandomColor";
-import NavigationTab from "../navigation/NavigationTab";
-import Header from "../components/Header";
-import SubjectsList from "../components/SubjectsList";
-import CourseDetailsView from "../components/CourseDetailsView";
-import GoBackIcon from "../components/GoBackIcon";
-import LoadingSpinner from "../components/LoadingSpinner";
+import StyledView from "../../styled_components/StyledView";
+import StyledText from "../../styled_components/StyledText";
+import useThemedStyles from "../../hooks/useThemedStyles";
+import useFetchCourseSubjects from "../../hooks/useFetchCourseSubjects";
+import useRandomColor from "../../hooks/useRandomColor";
+import NavigationTab from "../../navigation/NavigationTab";
+import Header from "../../components/Header";
+import SubjectsList from "../../components/SubjectsList";
+import CourseDetailsView from "../../components/CourseDetailsView";
+import GoBackIcon from "../../components/GoBackIcon";
+import LoadingSpinner from "../../components/LoadingSpinner";
 import { useFocusEffect } from "@react-navigation/native";
 import { useCallback } from "react";
 

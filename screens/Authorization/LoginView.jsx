@@ -1,8 +1,8 @@
 // import { Link } from "react-router-native";
 import { StyleSheet, TouchableWithoutFeedback, View } from "react-native";
-import StyledText from "../styled_components/StyledText";
-import StyledView from "../styled_components/StyledView";
-import LoginForm from "../components/LoginForm";
+import StyledText from "../../styled_components/StyledText";
+import StyledView from "../../styled_components/StyledView";
+import LoginForm from "../../components/LoginForm";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginView = () => {

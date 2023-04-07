@@ -1,4 +1,4 @@
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useLayoutEffect, useContext, useState } from "react";
 import usePost from "./usePost";
 import Constants from "expo-constants";
 import { AuthStorageContext } from "../contexts/AuthStorageContext";
@@ -10,13 +10,17 @@ const useJwtLogInService = () => {
   const { loading, data, error, execute } = usePost({ url: URL });
   const navigation = useNavigation();
   const authStorage = useContext(AuthStorageContext);
+  const [isAuthorized, setIsAuthorized] = useState(false);
 
   useEffect(() => {
-    if (data && !error) {
-      onSuccessLogin();
-    }
-    if (error) {
-      onFailedLogin();
+    console.log({ data, error, loading, URL });
+    if (!loading) {
+      if (data && !error) {
+        onSuccessLogin();
+      }
+      if (error) {
+        onFailedLogin();
+      }
     }
   }, [data, error, execute]);
 
@@ -31,6 +35,7 @@ const useJwtLogInService = () => {
   const onSuccessLogin = async () => {
     const token = await authStorage.getAccessToken();
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+    setIsAuthorized(true);
     navigation.navigate("Home");
     console.log("going to Courses");
   };
@@ -38,10 +43,11 @@ const useJwtLogInService = () => {
   const onFailedLogin = async () => {
     await authStorage.removeAccessToken();
     delete axios.defaults.headers.common["Authorization"];
+    setIsAuthorized(false);
     navigation.navigate("Login");
     console.log("Going to login");
   };
-  return { loading, data, error, jwtSignIn };
+  return { loading, data, error, isAuthorized, jwtSignIn };
 };
 
 export default useJwtLogInService;

@@ -29,9 +29,9 @@
     "react-native-screens": "~3.18.0",
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.9",
-    "yup": "^0.32.11",
-    "react-native-webviebview": "11.23.1",
-    "react-native-webview": "11.23.1"
+    "react-native-webview": "11.23.1",
+    "uuid": "^9.0.0",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

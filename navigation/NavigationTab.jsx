@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import QuickFlashcardsView from "../screens/QuickFlashcardsView";
-import MyCoursesView from "../screens/MyCoursesView";
+import MyCoursesView from "../screens/Courses/MyCoursesView";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import ProfileView from "../screens/ProfileView";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";

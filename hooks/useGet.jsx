@@ -14,7 +14,6 @@ const useGet = ({ url, headers, params }) => {
   }, [data, loading, error]);
 
   const execute = useCallback(async () => {
-    console.log("executing fun");
     setIsExecuting(true);
     setLoading(true);
     try {
