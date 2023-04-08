@@ -1,26 +1,23 @@
-//Acciones para modificar el estado
-export const FLASHCARD_ACTIONS = {
-  addFlashcard: "@flashcards/addedFlashcard",
-  removeFlashcard: "@flashcards/removedFlashcard",
-  editFlashcard: "@flashcards/editFlashcard",
-  setFlashcards: "@flashcards/setFlashcards",
+import { FLASHCARD_TYPES } from "./flashcard.types";
+
+const initialState = {
+  flashcards: [],
 };
 
 //Reducer function.
-
-export const reducer = (state, action) => {
+export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "@flashcards/addedFlashcard":
+    case FLASHCARD_TYPES.setFlashcards:
+      return setFlashcards(action, state);
+    case FLASHCARD_TYPES.addFlashcard:
       return addFlashcard(action, state);
-    case "@flashcards/removedFlashcard":
+    case FLASHCARD_TYPES.removeFlashcard:
       return removeFlashcard(action, state);
-    case "@flashcards/editFlashcard":
+    case FLASHCARD_TYPES.editFlashcard:
       return editFlashcard(action, state);
-    case "@flashcards/setFlashcards":
-      return setFlashcards(action);
     default:
       console.log(state, action);
-      throw new Error("Invalid action");
+      return state;
   }
 };
 
@@ -43,22 +40,30 @@ const payloadAccordingType = {
     },
   },
 };
+//Setear flashcards.
+// El action.payload: {newFlashcards}
+const setFlashcards = (action, state) => {
+  return { ...state, flashcards: action.payload };
+};
 
 //Añadir flashcard al estado.
 // El action.payload: {subjectId, type}
-const addFlashcard = (action, flashcards) => {
+const addFlashcard = (action, state) => {
   const { subjectId, type } = action.payload;
-  return [
-    ...flashcards,
-    {
-      id: flashcards.length + 1,
-      pos: flashcards.length + 1,
-      subjectId: subjectId,
-      type: type,
-      status: "active",
-      payload: payloadAccordingType[type],
-    },
-  ];
+  return {
+    ...state,
+    flashcards: [
+      ...state.flashcards,
+      {
+        id: state.flashcards.length + 1,
+        pos: state.flashcards.length + 1,
+        subjectId: subjectId,
+        type: type,
+        status: "active",
+        payload: payloadAccordingType[type],
+      },
+    ],
+  };
 };
 
 //Eliminar flashcard del estado
@@ -86,11 +91,4 @@ const editFlashcard = (action, flashcards) => {
       };
     return item;
   });
-};
-
-//Setear flashcards.
-// El action.payload: {newFlashcards}
-const setFlashcards = (action) => {
-  const { newFlashcards } = action.payload;
-  return newFlashcards;
 };

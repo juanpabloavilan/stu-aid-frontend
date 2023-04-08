@@ -2,19 +2,11 @@ import { StyleSheet, FlatList, View, Button } from "react-native";
 import StyledView from "../../styled_components/StyledView";
 import StyledText from "../../styled_components/StyledText";
 import GoBackIcon from "../../components/GoBackIcon";
-import FrontReverseQuestion from "../../components/FrontReverseQuestion";
-import TrueFalseQuestion from "../../components/TrueFalseQuestion";
-import ElaboratedQuestion from "../../components/ElaboratedQuestion";
-import SubjectForm from "../../components/SubjectForm";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import useThemedStyles from "../../hooks/useThemedStyles";
-import usePostSubjectFlashcards from "../../hooks/usePostSubjectFlashcards";
 import useFetchSubject from "../../hooks/useFetchSubject";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useCallback, useEffect, useReducer, useState } from "react";
-import { v4 as uuidv4 } from "uuid";
-import { FLASHCARD_ACTIONS } from "../../reducers/flashcards.reducer";
-import { reducer } from "../../reducers/flashcards.reducer";
+import FlashcardList from "../../components/FlashcardList";
 
 const SubjectView = () => {
   const navigation = useNavigation();
@@ -23,45 +15,12 @@ const SubjectView = () => {
     params: { subjectId, courseId },
   } = useRoute();
 
-  // Actualizar información del tema actual.
-  const { data, loading, error, execute } = usePostSubjectFlashcards(
-    courseId,
-    subjectId
-  );
-
   //Obtener información del tema actual.
   const {
     data: subjectData,
     loading: loadingGet,
     error: errorGet,
   } = useFetchSubject(courseId, subjectId);
-
-  // const [flashcards, dispatch] = useFlashcards([]);
-  const [flashcards, dispatch] = useReducer(reducer, []);
-  const [selected, setSelected] = useState(-1);
-
-  useEffect(() => {
-    if (subjectData) {
-      const action = {
-        type: FLASHCARD_ACTIONS.setFlashcards,
-        payload: { newFlashcards: subjectData.flashcards },
-      };
-
-      dispatch(action);
-    }
-  }, [subjectData]);
-
-  useEffect(() => {
-    console.log("flashcards", flashcards);
-  }, [flashcards]);
-
-  const upsertSubjectFlashcard = (values) => {
-    const data = { values };
-    delete data.createdAt;
-    delete data.updatedAt;
-    console.log(data);
-    execute(data);
-  };
 
   const styles = useThemedStyles(stylesCallback);
 
@@ -81,97 +40,14 @@ const SubjectView = () => {
                 </StyledText>
               </StyledView>
             </Pressable> */}
-
-          <FlatList
-            // showsVerticalScrollIndicator={false}
-            // showsHorizontalScrollIndicator={false}
-            // ListHeaderComponent={
-            //   <SubjectForm
-            //     flashcards={flashcards}
-            //     initialValues={subjectData}
-            //     onSubmit={upsertSubjectFlashcard}
-            //     data={data}
-            //     error={error}
-            //     loading={loading}
-            //   />
-            // }
-            initialNumToRender={5}
-            // getItemLayout={(data, index) => ({
-            //   length: 200,
-            //   offset: 200 * index,
-            //   index: index,
-            // })}
-            data={flashcards}
-            extraData={flashcards}
-            keyExtractor={(item) => uuidv4()}
-            renderItem={({ item }) => {
-              console.log(item);
-              if (item.type === "front-reverse") {
-                return (
-                  <FrontReverseQuestion
-                    {...item}
-                    flashcards={flashcards}
-                    dispatch={dispatch}
-                    selected={selected === item.id}
-                    setSelected={setSelected}
-                  />
-                );
-              }
-              if (item.type === "true-false") {
-                return (
-                  <TrueFalseQuestion
-                    {...item}
-                    flashcards={flashcards}
-                    dispatch={dispatch}
-                  />
-                );
-              }
-              if (item.type === "elaborated") {
-                return (
-                  <ElaboratedQuestion
-                    {...item}
-                    flashcards={flashcards}
-                    dispatch={dispatch}
-                  />
-                );
-              }
-            }}
-            ListFooterComponent={
-              <View style={styles.buttonsToolbar}>
-                <Button
-                  title="frente/reverso"
-                  onPress={() =>
-                    dispatch({
-                      type: FLASHCARD_ACTIONS.addFlashcard,
-                      payload: { subjectId: subjectId, type: "front-reverse" },
-                    })
-                  }
-                />
-                <Button
-                  title="verdadero/falso"
-                  onPress={() =>
-                    dispatch({
-                      type: FLASHCARD_ACTIONS.addFlashcard,
-                      payload: { subjectId: subjectId, type: "true-false" },
-                    })
-                  }
-                />
-                <Button
-                  title="elaborada"
-                  onPress={() =>
-                    dispatch({
-                      type: FLASHCARD_ACTIONS.addFlashcard,
-                      payload: { subjectId: subjectId, type: "elaborated" },
-                    })
-                  }
-                />
-              </View>
-            }
-            ItemSeparatorComponent={() => <View style={styles.separator} />}
+          <FlashcardList
+            subjectData={subjectData}
+            subjectId={subjectId}
+            courseId={courseId}
           />
         </>
       )}
-      {error && (
+      {errorGet && (
         <StyledView>
           <StyledText error h5>
             Hubo un error {errorGet}

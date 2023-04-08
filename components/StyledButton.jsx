@@ -7,9 +7,9 @@ const StyledButton = ({ style, onPress, children, ...restOfProps }) => {
   const [styleProps, setStyleProps] = useState([]);
 
   useEffect(() => {
-    const stylePropsArray = Object.keys(restOfProps).filter(
-      (currentProp) => styles[currentProp]
-    );
+    const stylePropsArray = Object.keys(restOfProps)
+      .filter((currentProp) => styles[currentProp])
+      .map((currentProp) => styles[currentProp]);
     setStyleProps(stylePropsArray);
   }, []);
 

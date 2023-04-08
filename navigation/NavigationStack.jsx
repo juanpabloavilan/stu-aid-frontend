@@ -14,6 +14,9 @@ import LoadingSpinner from "../components/LoadingSpinner";
 import LogoView from "../screens/LogoView";
 import useSetTheme from "../hooks/useSetTheme";
 import useAutoLogin from "../hooks/useAutoLogin";
+import FrontReverseQuestion from "../screens/Flashcards/FrontReverseQuestion";
+import TrueFalseQuestion from "../screens/Flashcards/TrueFalseQuestion";
+import ElaboratedQuestion from "../screens/Flashcards/ElaboratedQuestion";
 
 const Stack = createStackNavigator();
 const NavigationStack = () => {
@@ -50,6 +53,18 @@ const NavigationStack = () => {
             <Stack.Screen
               name="DeleteSubjectModal"
               component={DeleteSubjectModal}
+            />
+            <Stack.Screen
+              name="FrontReverseQuestionModal"
+              component={FrontReverseQuestion}
+            />
+            <Stack.Screen
+              name="TrueFalseQuestionModal"
+              component={TrueFalseQuestion}
+            />
+            <Stack.Screen
+              name="ElaboratedQuestionModal"
+              component={ElaboratedQuestion}
             />
           </Stack.Group>
         </Stack.Navigator>
