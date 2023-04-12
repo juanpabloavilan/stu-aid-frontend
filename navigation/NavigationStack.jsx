@@ -17,6 +17,7 @@ import useAutoLogin from "../hooks/useAutoLogin";
 import FrontReverseQuestion from "../screens/Flashcards/FrontReverseQuestion";
 import TrueFalseQuestion from "../screens/Flashcards/TrueFalseQuestion";
 import ElaboratedQuestion from "../screens/Flashcards/ElaboratedQuestion";
+import DeleteFlashcardModal from "../screens/Flashcards/DeleteFlashcardModal";
 
 const Stack = createStackNavigator();
 const NavigationStack = () => {
@@ -65,6 +66,10 @@ const NavigationStack = () => {
             <Stack.Screen
               name="ElaboratedQuestionModal"
               component={ElaboratedQuestion}
+            />
+            <Stack.Screen
+              name="DeleteFlashcardModal"
+              component={DeleteFlashcardModal}
             />
           </Stack.Group>
         </Stack.Navigator>

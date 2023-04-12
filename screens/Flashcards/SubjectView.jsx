@@ -2,11 +2,16 @@ import { StyleSheet, FlatList, View, Button } from "react-native";
 import StyledView from "../../styled_components/StyledView";
 import StyledText from "../../styled_components/StyledText";
 import GoBackIcon from "../../components/GoBackIcon";
-import { useNavigation, useRoute } from "@react-navigation/native";
+import {
+  useFocusEffect,
+  useNavigation,
+  useRoute,
+} from "@react-navigation/native";
 import useThemedStyles from "../../hooks/useThemedStyles";
 import useFetchSubject from "../../hooks/useFetchSubject";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import FlashcardList from "../../components/FlashcardList";
+import { useCallback } from "react";
 
 const SubjectView = () => {
   const navigation = useNavigation();
@@ -20,7 +25,18 @@ const SubjectView = () => {
     data: subjectData,
     loading: loadingGet,
     error: errorGet,
+    execute,
   } = useFetchSubject(courseId, subjectId);
+
+  useFocusEffect(
+    useCallback(() => {
+      execute();
+      console.log("fetching flashcards");
+      return () => {
+        console.log("Cleaning onFocusEffect");
+      };
+    }, [])
+  );
 
   const styles = useThemedStyles(stylesCallback);
 

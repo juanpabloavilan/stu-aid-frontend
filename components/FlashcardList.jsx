@@ -1,11 +1,4 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  FlatList,
-  Button,
-  Touchable,
-} from "react-native";
+import { StyleSheet, View, FlatList } from "react-native";
 import React, { useState, useEffect } from "react";
 import SubjectForm from "./SubjectForm";
 import { useDispatch, useSelector } from "react-redux";
@@ -44,11 +37,10 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
   );
 
   const upsertSubjectFlashcard = (values) => {
-    const data = { values };
-    delete data.createdAt;
-    delete data.updatedAt;
+    delete values.createdAt;
+    delete values.updatedAt;
     console.log(data);
-    execute(data);
+    execute(values);
   };
 
   return (
@@ -57,7 +49,6 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
       showsHorizontalScrollIndicator={false}
       ListHeaderComponent={
         <SubjectForm
-          flashcards={flashcards}
           initialValues={subjectData}
           onSubmit={upsertSubjectFlashcard}
           data={data}
@@ -75,6 +66,8 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             dispatch={dispatch}
             selected={selected}
             setSelected={setSelected}
+            courseId={courseId}
+            subjectId={subjectId}
           />
         );
       }}
@@ -86,7 +79,10 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             padding
             onPress={() => {
               dispatch(addFlashcard({ type: "front-reverse", subjectId }));
-              navigation.navigate("FrontReverseQuestionModal");
+              navigation.navigate("FrontReverseQuestionModal", {
+                subjectId,
+                courseId,
+              });
             }}
           >
             <StyledText white bold h4>
@@ -100,7 +96,10 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             padding
             onPress={() => {
               dispatch(addFlashcard({ type: "true-false", subjectId }));
-              navigation.navigate("TrueFalseQuestionModal");
+              navigation.navigate("TrueFalseQuestionModal", {
+                subjectId,
+                courseId,
+              });
             }}
           >
             <StyledText white bold h4>
@@ -114,7 +113,10 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             padding
             onPress={() => {
               dispatch(addFlashcard({ type: "elaborated", subjectId }));
-              navigation.navigate("ElaboratedQuestionModal");
+              navigation.navigate("ElaboratedQuestionModal", {
+                subjectId,
+                courseId,
+              });
             }}
           >
             <StyledText white bold h4>
@@ -138,6 +140,7 @@ const stylesCallback = (theme) =>
       marginVertical: 10,
     },
     buttonsToolbar: {
+      marginTop: 12,
       flexDirection: "row",
       justifyContent: "flex-start",
       columnGap: 12,

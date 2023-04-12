@@ -78,9 +78,9 @@ const removeFlashcard = (action, flashcards) => {
 
 //Editar flashcard del estado
 // El action.payload: {id, pos, front, back}
-const editFlashcard = (action, flashcards) => {
+const editFlashcard = (action, state) => {
   const { id, pos, front, back } = action.payload;
-  return flashcards.map((item) => {
+  return state.flashcards.map((item) => {
     if ((item.id && item.id === id) || (item.pos && item.pos === pos))
       return {
         ...item,

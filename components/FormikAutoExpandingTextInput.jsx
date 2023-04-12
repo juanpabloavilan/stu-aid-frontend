@@ -11,7 +11,7 @@ const FormikAutoExpandingTextInput = ({
   const [field, meta, helpers] = useField(name);
   const showError = meta.error && meta.touched;
   const [height, setHeight] = useState(30);
-  const heightRef = useRef();
+  const heightRef = useRef(30);
 
   useEffect(() => {
     if (height > heightRef) {
@@ -30,7 +30,6 @@ const FormikAutoExpandingTextInput = ({
           textInputStyles,
           {
             height: Math.max(heightRef.current, height),
-            backgroundColor: "cyan",
           },
         ]}
         value={field.value}
@@ -39,8 +38,8 @@ const FormikAutoExpandingTextInput = ({
         {...restOfProps}
       />
 
-      <StyledText>height: {height}</StyledText>
-      <StyledText>heightRef: {heightRef.current}</StyledText>
+      {/* <StyledText>height: {height}</StyledText>
+      <StyledText>heightRef: {heightRef.current}</StyledText> */}
       {showError && (
         <StyledText error style={styles.errorMessage}>
           {meta.error}

@@ -4,16 +4,12 @@ import useThemedStyles from "../../hooks/useThemedStyles";
 import { Formik } from "formik";
 import { FrontReverseSchema } from "../../schemas/flashcard.schema";
 import FormikAutoExpandingTextInput from "../../components/FormikAutoExpandingTextInput";
-import StyledButton from "../../components/StyledButton";
 import FlashcardOptions from "../../components/FlashcardOptions";
-import { Dimensions } from "react-native";
-import StyledView from "../../styled_components/StyledView";
-import TextEditor from "../../components/TextEditor";
-import { FLASHCARD_TYPES } from "../../reducers/flashcard.types";
 import StyledModalScreen from "../../components/StyledModalScreen";
 import StyledText from "../../styled_components/StyledText";
-import { useRoute } from "@react-navigation/native";
-import { back } from "react-native/Libraries/Animated/Easing";
+import { useNavigation, useRoute } from "@react-navigation/native";
+import usePostFlashcards from "../../hooks/usePostFlashcards";
+import { useEffect } from "react";
 /**
  * TODO:
  * 0. Implementar Redux global state.
@@ -24,42 +20,65 @@ import { back } from "react-native/Libraries/Animated/Easing";
  *
  */
 const FrontReverseQuestion = () => {
-  const { params: initialValues } = useRoute();
-  const initialVals = initialValues
-    ? initialValues
-    : {
-        id: null,
-        pos: null,
-        payload: {
-          front: "",
-          back: "",
-        },
-      };
+  const navigation = useNavigation();
+
+  const {
+    params: { initialValues, subjectId, courseId },
+  } = useRoute();
+
+  const [initialVals, setInitialVals] = useState(
+    initialValues
+      ? initialValues
+      : {
+          subjectId,
+          id: null,
+          pos: null,
+          payload: {
+            front: "",
+            back: "",
+          },
+        }
+  );
+
+  const { data, loading, error, execute } = usePostFlashcards(
+    courseId,
+    subjectId
+  );
+
+  console.log(initialVals);
+  useEffect(() => {
+    if (data && !error) {
+      navigation.goBack();
+    }
+  }, [data, error]);
 
   const styles = useThemedStyles(stylesCallback);
 
   const onSubmit = (data) => {
     console.log(data);
-    const { id, pos, front, back } = data;
-    dispatch({
-      type: FLASHCARD_TYPES.editFlashcard,
+    const { id, front, back } = data;
+    const flashcardPayload = {
       payload: {
-        id,
-        pos,
         front,
         back,
       },
-    });
+      subjectId,
+      type: "front-reverse",
+    };
+
+    if (id) {
+      flashcardPayload.id = id;
+    }
+
+    execute(flashcardPayload);
   };
 
   const onDelete = () => {
-    console.log(data);
-    dispatch({
-      type: FLASHCARD_TYPES.removeFlashcard,
-      payload: {
-        id,
-        pos,
-      },
+    if (!initialVals.id) return;
+    navigation.navigate("DeleteFlashcardModal", {
+      flashcardId: initialVals.id,
+      subjectId,
+      courseId,
     });
   };
 
@@ -67,11 +86,15 @@ const FrontReverseQuestion = () => {
     <StyledModalScreen>
       <Formik
         onSubmit={onSubmit}
-        initialValues={initialValues}
+        initialValues={initialVals}
         validationSchema={FrontReverseSchema}
       >
         {({ handleSubmit }) => (
-          <View style={{ backgroundColor: "cyan" }}>
+          <View>
+            <StyledText h3 bold blue style={{ marginVertical: 10 }}>
+              Pregunta de Frente/Reverso
+            </StyledText>
+
             <FormikAutoExpandingTextInput
               name="front"
               textInputStyles={styles.textInput}
@@ -104,6 +127,7 @@ export default FrontReverseQuestion;
 const stylesCallback = (theme) =>
   StyleSheet.create({
     textInput: {
+      marginTop: 10,
       borderWidth: 0,
       color: theme.themeTokens.textColor,
       outlineStyle: "none",

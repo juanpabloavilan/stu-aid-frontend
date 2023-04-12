@@ -10,6 +10,7 @@ import LoadingSpinner from "./LoadingSpinner";
 import { upsertSubject } from "../schemas/subject.schema";
 
 const SubjectForm = ({ initialValues, onSubmit, data, error, loading }) => {
+  console.log(initialValues, "SubjectForm");
   const styles = useThemedStyles(stylesCallback);
 
   return (
