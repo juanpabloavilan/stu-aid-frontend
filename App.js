@@ -12,11 +12,11 @@ import {
 } from "redux";
 import { Provider } from "react-redux";
 import { reducer as flashcardReducer } from "./reducers/flashcards.reducer";
-import { logger } from "./middlewares";
+// import { logger } from "./middlewares";
 
 const authStorage = new AuthStorage("auth");
-const composedEnhancer = compose(applyMiddleware(logger));
-const store = createStore(flashcardReducer, composedEnhancer);
+// const composedEnhancer = compose(applyMiddleware(logger));
+const store = createStore(flashcardReducer);
 
 export default function App() {
   return (

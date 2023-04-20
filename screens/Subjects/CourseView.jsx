@@ -4,8 +4,6 @@ import StyledText from "../../styled_components/StyledText";
 import useThemedStyles from "../../hooks/useThemedStyles";
 import useFetchCourseSubjects from "../../hooks/useFetchCourseSubjects";
 import useRandomColor from "../../hooks/useRandomColor";
-import NavigationTab from "../../navigation/NavigationTab";
-import Header from "../../components/Header";
 import SubjectsList from "../../components/SubjectsList";
 import CourseDetailsView from "../../components/CourseDetailsView";
 import GoBackIcon from "../../components/GoBackIcon";
@@ -30,7 +28,6 @@ const CourseView = ({ route, navigation }) => {
 
   return (
     <StyledView main bgDefault>
-      <Header />
       <StyledView>
         <GoBackIcon
           style={styles.goBackIcon}

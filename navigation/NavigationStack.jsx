@@ -18,6 +18,9 @@ import FrontReverseQuestion from "../screens/Flashcards/FrontReverseQuestion";
 import TrueFalseQuestion from "../screens/Flashcards/TrueFalseQuestion";
 import ElaboratedQuestion from "../screens/Flashcards/ElaboratedQuestion";
 import DeleteFlashcardModal from "../screens/Flashcards/DeleteFlashcardModal";
+import StudySessionView from "../screens/StudySession/StudySessionView";
+import { View } from "react-native";
+import SessionCompleted from "../screens/StudySession/SessionCompleted";
 
 const Stack = createStackNavigator();
 const NavigationStack = () => {
@@ -30,6 +33,7 @@ const NavigationStack = () => {
     return (
       <>
         <StatusBar style={currentTheme === "dark" ? "light" : "dark"} />
+
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           <Stack.Screen name="Logo" component={LogoView} />
           <Stack.Screen name="Login" component={LoginView} />
@@ -38,6 +42,8 @@ const NavigationStack = () => {
           <Stack.Screen name="Home" component={HomeView} />
           <Stack.Screen name="CourseView" component={CourseView} />
           <Stack.Screen name="Subject" component={SubjectView} />
+          <Stack.Screen name="Study Session" component={StudySessionView} />
+          <Stack.Screen name="Session Completed" component={SessionCompleted} />
           <Stack.Group
             screenOptions={{
               presentation: "transparentModal",

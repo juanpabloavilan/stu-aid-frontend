@@ -4,7 +4,7 @@ import { StatusBar } from "expo-status-bar";
 
 import NavigationStack from "../navigation/NavigationStack";
 import useThemedStyles from "../hooks/useThemedStyles";
-import LogoView from "./LogoView";
+import Constants from "expo-constants";
 
 const Main = () => {
   const styles = useThemedStyles(stylesCallback);
@@ -18,6 +18,7 @@ const Main = () => {
 const stylesCallback = (theme) => {
   return StyleSheet.create({
     container: {
+      marginTop: Constants.statusBarHeight,
       color: theme.themeTokens.textColor,
       flex: 1,
       flexGrow: 1,

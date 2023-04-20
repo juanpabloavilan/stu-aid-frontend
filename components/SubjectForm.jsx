@@ -21,7 +21,7 @@ const SubjectForm = ({ initialValues, onSubmit, data, error, loading }) => {
       validateOnBlur={true}
     >
       {({ handleSubmit }) => (
-        <StyledView main>
+        <StyledView>
           <Pressable onPress={(values) => handleSubmit(values)}>
             <StyledView rounded blue style={styles.button}>
               <StyledText bold white>

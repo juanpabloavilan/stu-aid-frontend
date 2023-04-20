@@ -12,23 +12,23 @@ import StyledText from "../styled_components/StyledText";
 import { useNavigation } from "@react-navigation/native";
 
 const FlashcardList = ({ subjectData, subjectId, courseId }) => {
-  const flashcards = useSelector((state) => state.flashcards);
-  const dispatch = useDispatch();
-  const [selected, setSelected] = useState(-1);
+  // const flashcards = useSelector((state) => state.flashcards);
+  // const dispatch = useDispatch();
+  // const [selected, setSelected] = useState(-1);
   const navigation = useNavigation();
 
   const styles = useThemedStyles(stylesCallback);
 
-  useEffect(() => {
-    if (subjectData) {
-      const flashcardsRes = subjectData.flashcards;
-      dispatch(setFlashcards(flashcardsRes));
-    }
-  }, [subjectData]);
+  // useEffect(() => {
+  //   if (subjectData) {
+  //     const flashcardsRes = subjectData.flashcards;
+  //     dispatch(setFlashcards(flashcardsRes));
+  //   }
+  // }, [subjectData]);
 
-  useEffect(() => {
-    console.log("flashcards", flashcards);
-  }, [flashcards]);
+  // useEffect(() => {
+  //   console.log("flashcards", flashcards);
+  // }, [flashcards]);
 
   // Actualizar información del tema actual.
   const { data, loading, error, execute } = usePostSubjectFlashcards(
@@ -39,7 +39,8 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
   const upsertSubjectFlashcard = (values) => {
     delete values.createdAt;
     delete values.updatedAt;
-    console.log(data);
+    delete values.flashcards;
+    console.log(values);
     execute(values);
   };
 
@@ -56,19 +57,11 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
           loading={loading}
         />
       }
-      data={flashcards}
-      extraData={flashcards}
+      data={subjectData.flashcards}
       keyExtractor={(item) => uuidv4()}
       renderItem={({ item }) => {
         return (
-          <FlashcardItem
-            {...item}
-            dispatch={dispatch}
-            selected={selected}
-            setSelected={setSelected}
-            courseId={courseId}
-            subjectId={subjectId}
-          />
+          <FlashcardItem {...item} courseId={courseId} subjectId={subjectId} />
         );
       }}
       ListFooterComponent={
@@ -78,7 +71,7 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             green
             padding
             onPress={() => {
-              dispatch(addFlashcard({ type: "front-reverse", subjectId }));
+              // dispatch(addFlashcard({ type: "front-reverse", subjectId }));
               navigation.navigate("FrontReverseQuestionModal", {
                 subjectId,
                 courseId,
@@ -92,10 +85,10 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
 
           <StyledButton
             rounded
-            yellow
+            blue
             padding
             onPress={() => {
-              dispatch(addFlashcard({ type: "true-false", subjectId }));
+              // dispatch(addFlashcard({ type: "true-false", subjectId }));
               navigation.navigate("TrueFalseQuestionModal", {
                 subjectId,
                 courseId,
@@ -112,7 +105,7 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             gray
             padding
             onPress={() => {
-              dispatch(addFlashcard({ type: "elaborated", subjectId }));
+              // dispatch(addFlashcard({ type: "elaborated", subjectId }));
               navigation.navigate("ElaboratedQuestionModal", {
                 subjectId,
                 courseId,
@@ -120,7 +113,7 @@ const FlashcardList = ({ subjectData, subjectId, courseId }) => {
             }}
           >
             <StyledText white bold h4>
-              Verdadero/Falso
+              Elaborada
             </StyledText>
           </StyledButton>
         </View>
@@ -141,8 +134,7 @@ const stylesCallback = (theme) =>
     },
     buttonsToolbar: {
       marginTop: 12,
-      flexDirection: "row",
       justifyContent: "flex-start",
-      columnGap: 12,
+      gap: 12,
     },
   });

@@ -53,7 +53,7 @@ const DeleteSubjectModal = () => {
         }}
       >
         <StyledText h3 bold blue>
-          Eliminar curso
+          Eliminar tema de estudio.
         </StyledText>
 
         <StyledText h4>

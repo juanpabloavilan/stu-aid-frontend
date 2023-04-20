@@ -99,7 +99,7 @@ const FrontReverseQuestion = () => {
               name="front"
               textInputStyles={styles.textInput}
               initialValue={initialVals.front}
-              placeholder="Front"
+              placeholder="Frente"
               placeholderTextColor={styles.placeholder.color}
             />
 
@@ -107,7 +107,7 @@ const FrontReverseQuestion = () => {
               name="back"
               textInputStyles={styles.textInput}
               initialValue={initialVals.back}
-              placeholder="Back"
+              placeholder="Reverso"
               placeholderTextColor={styles.placeholder.color}
             />
 

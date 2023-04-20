@@ -23,36 +23,35 @@ const NewSubjectView = () => {
     }
   }, [data]);
 
+  const onSubmitNewSubject = (values) => {
+    delete values.createdAt;
+    delete values.updatedAt;
+    execute(values);
+  };
+
   //Form initial values
   const initialValues = {
     name: "",
     status: "active",
     courseId,
-    createdAt: "Fecha de creación: " + new Date().toLocaleString(),
-    updatedAt: "Fecha de modificación: " + new Date().toLocaleString(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
   };
 
   return (
     <StyledModalScreen>
-      <StyledView main bgDefault paddingDefault style={styles.container}>
-        <GoBackIcon
-          goBack={() => navigation.goBack()}
-          color={styles.goBackIcon.color}
+      <StyledView>
+        <StyledText bold blue h2>
+          Crear tema nuevo
+        </StyledText>
+
+        <SubjectForm
+          initialValues={initialValues}
+          onSubmit={onSubmitNewSubject}
+          data={data}
+          error={error}
+          loading={loading}
         />
-
-        <StyledView paddingDefault main bgDefault>
-          <StyledText bold blue h2>
-            Crear tema nuevo
-          </StyledText>
-
-          <SubjectForm
-            initialValues={initialValues}
-            onSubmit={execute}
-            data={data}
-            error={error}
-            loading={loading}
-          />
-        </StyledView>
       </StyledView>
     </StyledModalScreen>
   );

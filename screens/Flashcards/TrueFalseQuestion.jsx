@@ -10,6 +10,7 @@ import StyledText from "../../styled_components/StyledText";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import usePostFlashcards from "../../hooks/usePostFlashcards";
 import { useEffect } from "react";
+import SwitchInput from "../../components/SwitchInput";
 
 const TrueFalseQuestion = () => {
   const navigation = useNavigation();
@@ -20,15 +21,15 @@ const TrueFalseQuestion = () => {
 
   const [initialVals, setInitialVals] = useState(
     initialValues
-      ? initialValues
+      ? {
+          id: initialValues.id,
+          front: initialValues.front,
+          answer: initialValues.back.answer,
+        }
       : {
-          subjectId,
           id: null,
-          pos: null,
-          payload: {
-            front: "",
-            back: "",
-          },
+          front: "",
+          answer: "false",
         }
   );
 
@@ -38,6 +39,7 @@ const TrueFalseQuestion = () => {
   );
 
   console.log(initialVals);
+
   useEffect(() => {
     if (data && !error) {
       navigation.goBack();
@@ -48,11 +50,13 @@ const TrueFalseQuestion = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    const { id, front, back } = data;
+    const { id, front, answer } = data;
     const flashcardPayload = {
       payload: {
         front,
-        back,
+        back: {
+          answer,
+        },
       },
       subjectId,
       type: "true-false",
@@ -83,23 +87,25 @@ const TrueFalseQuestion = () => {
       >
         {({ handleSubmit }) => (
           <View>
-            <StyledText h3 bold blue>
+            <StyledText h3 bold blue style={{ marginVertical: 10 }}>
               Pregunta de Verdadero/Falso
             </StyledText>
             <FormikAutoExpandingTextInput
               name="front"
               textInputStyles={styles.textInput}
               initialValue={initialVals.front}
-              placeholder="Front"
+              placeholder="Frente"
               placeholderTextColor={styles.placeholder.color}
             />
 
-            <FormikAutoExpandingTextInput
-              name="back"
-              textInputStyles={styles.textInput}
-              initialValue={initialVals.back}
-              placeholder="Back"
-              placeholderTextColor={styles.placeholder.color}
+            <SwitchInput
+              name="answer"
+              placeholder="Respuesta"
+              trueValue="true"
+              trueLabel="Verdadero"
+              falseValue="false"
+              falseLabel="Falso"
+              initialValue={initialVals.answer}
             />
 
             <FlashcardOptions
@@ -118,6 +124,7 @@ export default TrueFalseQuestion;
 const stylesCallback = (theme) =>
   StyleSheet.create({
     textInput: {
+      marginTop: 10,
       borderWidth: 0,
       color: theme.themeTokens.textColor,
       outlineStyle: "none",

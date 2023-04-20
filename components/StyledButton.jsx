@@ -52,4 +52,7 @@ const stylesCallback = (theme) =>
     green: {
       backgroundColor: theme.themeTokens.colors.green,
     },
+    lightGray: {
+      backgroundColor: theme.themeTokens.secondaryBackgroundColor,
+    },
   });

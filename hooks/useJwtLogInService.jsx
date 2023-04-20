@@ -36,8 +36,7 @@ const useJwtLogInService = () => {
     const token = await authStorage.getAccessToken();
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
     setIsAuthorized(true);
-    navigation.navigate("Home");
-    console.log("going to Courses");
+    navigation.navigate("Home", { screen: "QuickFlashcards" });
   };
 
   const onFailedLogin = async () => {
