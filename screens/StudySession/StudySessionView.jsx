@@ -11,6 +11,7 @@ import FlashcardCard from "../../components/FlashcardsView/FlashcardCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
 import { useSharedValue, withSpring } from "react-native-reanimated";
 import { useEffect } from "react";
+import ProgressBar from "../../components/ProgressBar";
 
 const StudySessionView = () => {
   const { params } = useRoute();
@@ -66,44 +67,51 @@ const StudySessionView = () => {
       {loading && <LoadingSpinner />}
 
       {!loading && data?.flashcards && data.flashcards.length > 0 && (
-        <FlatList
-          data={data.flashcards}
-          keyExtractor={(item, index) => String(item.id)}
-          horizontal
-          inverted
-          scrollEnabled={false}
-          removeClippedSubviews={false}
-          contentContainerStyle={{
-            flex: 1,
-            justifyContent: "center",
-          }}
-          renderItem={({ item, index }) => (
-            <FlashcardCard
-              flashcard={item}
-              index={index}
-              scrollXIndexAnimated={scrollXIndexAnimated}
-              showing={index === currentIndex}
-              nextCard={nextCard}
-            />
-          )}
-          CellRendererComponent={({
-            item,
-            index,
-            children,
-            style,
-            ...props
-          }) => {
-            const newStyle = [
+        <>
+          <ProgressBar
+            step={currentIndex + 1}
+            steps={data.flashcards.length}
+            height={12}
+          />
+          <FlatList
+            data={data.flashcards}
+            keyExtractor={(item, index) => String(item.id)}
+            horizontal
+            inverted
+            scrollEnabled={false}
+            removeClippedSubviews={false}
+            contentContainerStyle={{
+              flex: 1,
+              justifyContent: "center",
+            }}
+            renderItem={({ item, index }) => (
+              <FlashcardCard
+                flashcard={item}
+                index={index}
+                scrollXIndexAnimated={scrollXIndexAnimated}
+                showing={index === currentIndex}
+                nextCard={nextCard}
+              />
+            )}
+            CellRendererComponent={({
+              item,
+              index,
+              children,
               style,
-              { zIndex: data.flashcards.length - index },
-            ];
-            return (
-              <View style={newStyle} index={index} {...props}>
-                {children}
-              </View>
-            );
-          }}
-        />
+              ...props
+            }) => {
+              const newStyle = [
+                style,
+                { zIndex: data.flashcards.length - index },
+              ];
+              return (
+                <View style={newStyle} index={index} {...props}>
+                  {children}
+                </View>
+              );
+            }}
+          />
+        </>
       )}
 
       {!loading && data?.flashcards.length === 0 && (

@@ -1,13 +1,15 @@
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import StyledView from "../styled_components/StyledView";
 import StyledText from "../styled_components/StyledText";
 import useThemedStyles from "../hooks/useThemedStyles";
 import StartSessionIcon from "react-native-vector-icons/FontAwesome5";
 import useRandomColor from "../hooks/useRandomColor";
+import { useNavigation } from "@react-navigation/native";
 
 const CourseDetailsView = ({ id, name, status, description, priority }) => {
   const styles = useThemedStyles(styleSheetsCallback);
   const randomColor = useRandomColor(id);
+  const navigation = useNavigation();
 
   return (
     <StyledView rounded style={styles.container}>
@@ -23,9 +25,13 @@ const CourseDetailsView = ({ id, name, status, description, priority }) => {
           </StyledText>
         )}
       </View>
-      <View style={styles.iconContainer}>
-        <StartSessionIcon name="play-circle" size={50} color={randomColor} />
-      </View>
+      <Pressable
+        onPress={() => navigation.navigate("Study Session", { course: id })}
+      >
+        <View style={styles.iconContainer}>
+          <StartSessionIcon name="play-circle" size={50} color={randomColor} />
+        </View>
+      </Pressable>
     </StyledView>
   );
 };

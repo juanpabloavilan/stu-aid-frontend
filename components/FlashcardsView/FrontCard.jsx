@@ -14,7 +14,7 @@ import useRandomColor from "../../hooks/useRandomColor";
 const { width, height } = Dimensions.get("window");
 
 const CARD_WIDTH = width * 0.8;
-const CARD_HEIGHT = height * 0.8;
+const CARD_HEIGHT = height * 0.7;
 
 const FrontCard = ({ flashcard, rotate }) => {
   const color = useRandomColor(flashcard.id);
