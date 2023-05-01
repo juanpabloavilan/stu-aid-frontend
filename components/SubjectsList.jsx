@@ -3,19 +3,35 @@ import SubjectItem from "./SubjectItem";
 import StyledView from "../styled_components/StyledView";
 import StyledText from "../styled_components/StyledText";
 import AddButton from "./AddButton";
-import { useNavigation } from "@react-navigation/native";
+import { useFocusEffect, useNavigation } from "@react-navigation/native";
 import useThemedStyles from "../hooks/useThemedStyles";
+import { useState } from "react";
+import { useCallback } from "react";
 
 const SubjectsList = ({ subjectsList, courseId }) => {
   const navigation = useNavigation();
   const styles = useThemedStyles(stylesCallback);
+
+  const [selectedSubject, setSelectedSubject] = useState(-1);
+  useFocusEffect(
+    useCallback(() => {
+      setSelectedSubject(-1);
+    }, [])
+  );
 
   return (
     <FlatList
       showsVerticalScrollIndicator={false}
       showsHorizontalScrollIndicator={false}
       data={subjectsList}
-      renderItem={({ item }) => <SubjectItem {...item} />}
+      renderItem={({ item, index }) => (
+        <SubjectItem
+          {...item}
+          index={index}
+          selectedSubject={selectedSubject}
+          setSelectedSubject={setSelectedSubject}
+        />
+      )}
       keyExtractor={(item) => item.id}
       ListFooterComponent={
         <>

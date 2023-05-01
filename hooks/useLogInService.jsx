@@ -19,6 +19,7 @@ const useLogInService = () => {
 
   const onSuccessLogin = async () => {
     await authStorage.setAccessToken(data.token);
+    await authStorage.setUserInfo(data.user);
     axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
     navigation.navigate("Home");
   };

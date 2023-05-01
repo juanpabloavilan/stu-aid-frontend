@@ -14,20 +14,27 @@ import { useState } from "react";
 import EditCourseIcon from "react-native-vector-icons/FontAwesome";
 import DeleteCourseIcon from "react-native-vector-icons/MaterialCommunityIcons";
 
-const CourseItem = ({ id, name, status, description, priority }) => {
+const CourseItem = ({
+  id,
+  name,
+  status,
+  description,
+  priority,
+  index,
+  selectedCourse,
+  setSelectedCourse,
+}) => {
   const styles = useThemedStyles(styleSheetsCallback);
   const randomColor = useRandomColor(id);
   const navigation = useNavigation();
-  const [showOptions, setShowOptions] = useState(false);
+  const showOptions = index === selectedCourse;
 
   const onEditModal = () => {
     navigation.navigate("EditCourseModal", { id });
-    setShowOptions(false);
   };
 
   const onDeleteModal = () => {
     navigation.navigate("DeleteCourseModal", { id });
-    setShowOptions(false);
   };
 
   return (
@@ -36,7 +43,7 @@ const CourseItem = ({ id, name, status, description, priority }) => {
         navigation.navigate("CourseView", { id });
       }}
       onLongPress={() => {
-        setShowOptions(true);
+        setSelectedCourse(index);
       }}
     >
       <View>

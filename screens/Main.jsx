@@ -1,7 +1,4 @@
-import { StyleSheet, SafeAreaView } from "react-native";
-
-import { StatusBar } from "expo-status-bar";
-
+import { StyleSheet, SafeAreaView, View } from "react-native";
 import NavigationStack from "../navigation/NavigationStack";
 import useThemedStyles from "../hooks/useThemedStyles";
 import Constants from "expo-constants";
@@ -10,7 +7,11 @@ const Main = () => {
   const styles = useThemedStyles(stylesCallback);
   return (
     <SafeAreaView style={styles.container}>
-      <NavigationStack />
+      <View
+        style={[{ marginTop: Constants.statusBarHeight }, styles.container]}
+      >
+        <NavigationStack />
+      </View>
     </SafeAreaView>
   );
 };
@@ -18,7 +19,6 @@ const Main = () => {
 const stylesCallback = (theme) => {
   return StyleSheet.create({
     container: {
-      marginTop: Constants.statusBarHeight,
       color: theme.themeTokens.textColor,
       flex: 1,
       flexGrow: 1,

@@ -2,16 +2,39 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import StyledButton from "../StyledButton";
 import StyledText from "../../styled_components/StyledText";
-import usePostFlashcards from "../../hooks/usePostFlashcards";
+import useAnswerFlashcard from "../../hooks/useAnswerFlashcard";
+import { useEffect } from "react";
 
-const ScoreBoard = ({ nextCard, flashcard, index }) => {
-  //const {} = usePostFlashcards()
+const BackAnswerBoard = ({ nextCard, flashcard, index }) => {
+  const courseId = flashcard?.subject?.courseId;
+  const subjectId = flashcard?.subjectId;
+  const flashcardId = flashcard?.id;
+  const { loading, data, error, execute } = useAnswerFlashcard(
+    courseId,
+    subjectId,
+    flashcardId
+  );
 
+  useEffect(() => {
+    if (data) {
+      nextCard(index);
+      console.log(
+        "🚀 ~ file: ScoreBoard.jsx:33 ~ ScoreBoard ~ nextCard:",
+        index
+      );
+    }
+  }, [data]);
+
+  const sendScore = async (value) => {
+    await execute({ score: value });
+    console.log("Calificación", value);
+  };
+
+  console.log(flashcard, index);
   return (
     <View
       style={{
         alignSelf: "center",
-        backgroundColor: "white",
         borderRadius: 16,
         padding: 12,
       }}
@@ -27,14 +50,7 @@ const ScoreBoard = ({ nextCard, flashcard, index }) => {
           red
           rounded
           style={styles.buttonOption}
-          onPress={() => {
-            console.log("Calificación 1");
-            nextCard(index);
-            console.log(
-              "🚀 ~ file: ScoreBoard.jsx:33 ~ ScoreBoard ~ nextCard:",
-              index
-            );
-          }}
+          onPress={() => sendScore(1)}
         >
           <StyledText h4 white>
             1
@@ -45,7 +61,7 @@ const ScoreBoard = ({ nextCard, flashcard, index }) => {
           style={styles.buttonOption}
           lightGray
           rounded
-          onPress={() => console.log("Calificación 2")}
+          onPress={() => sendScore(2)}
         >
           <StyledText h4 secondaryColor>
             2
@@ -55,7 +71,7 @@ const ScoreBoard = ({ nextCard, flashcard, index }) => {
           style={styles.buttonOption}
           lightGray
           rounded
-          onPress={() => console.log("Calificación 3")}
+          onPress={() => sendScore(3)}
         >
           <StyledText h4 secondaryColor>
             3
@@ -65,7 +81,7 @@ const ScoreBoard = ({ nextCard, flashcard, index }) => {
           style={styles.buttonOption}
           lightGray
           rounded
-          onPress={() => console.log("Calificación 4")}
+          onPress={() => sendScore(4)}
         >
           <StyledText h4 secondaryColor>
             4
@@ -75,7 +91,7 @@ const ScoreBoard = ({ nextCard, flashcard, index }) => {
           green
           style={styles.buttonOption}
           rounded
-          onPress={() => console.log("Calificación 5")}
+          onPress={() => sendScore(5)}
         >
           <StyledText h4 white>
             5
@@ -91,7 +107,7 @@ const ScoreBoard = ({ nextCard, flashcard, index }) => {
   );
 };
 
-export default ScoreBoard;
+export default BackAnswerBoard;
 
 const styles = StyleSheet.create({
   buttonOption: {

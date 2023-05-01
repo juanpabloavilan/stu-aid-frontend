@@ -9,14 +9,14 @@ import {
 import React from "react";
 import StyledView from "../../styled_components/StyledView";
 import StyledText from "../../styled_components/StyledText";
-import ScoreBoard from "./ScoreBoard";
+import BackAnswerBoard from "./BackAnswerBoard";
 
 const { width, height } = Dimensions.get("window");
 
 const CARD_WIDTH = width * 0.8;
 const CARD_HEIGHT = height * 0.7;
 
-const BackCard = ({ flashcard, rotate }) => {
+const BackCard = ({ flashcard, rotate, nextCard, index }) => {
   const { type, payload } = flashcard;
   const back = {
     "front-reverse": payload.back,
@@ -24,32 +24,39 @@ const BackCard = ({ flashcard, rotate }) => {
     elaborated: payload.back.answer,
   };
   return (
-    <Pressable onPress={rotate}>
-      <StyledView bgSecondary rounded style={styles.card}>
-        <View style={styles.labelContainer}>
-          <StyledText h5 bold>
-            Reverso
-          </StyledText>
-          <StyledText h5 bold>
-            {flashcard?.subject?.name}
-          </StyledText>
-        </View>
+    <>
+      <Pressable onPress={rotate}>
+        <StyledView bgSecondary rounded style={styles.card}>
+          <View style={styles.labelContainer}>
+            <StyledText h5 bold>
+              Reverso
+            </StyledText>
+            <StyledText h5 bold>
+              {flashcard?.subject?.name}
+            </StyledText>
+          </View>
 
-        <View
-          style={{
-            flexGrow: 1,
-            flex: 1,
-            flexShrink: 1,
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <StyledText h4 bold style={{ width: "100%" }}>
-            {back[type]}
-          </StyledText>
-        </View>
-      </StyledView>
-    </Pressable>
+          <View
+            style={{
+              flexGrow: 1,
+              flex: 1,
+              flexShrink: 1,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <StyledText h4 bold style={{ width: "100%" }}>
+              {back[type]}
+            </StyledText>
+          </View>
+        </StyledView>
+      </Pressable>
+      <BackAnswerBoard
+        flashcard={flashcard}
+        nextCard={nextCard}
+        index={index}
+      />
+    </>
   );
 };
 

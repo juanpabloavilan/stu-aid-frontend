@@ -7,18 +7,25 @@ import { StyleSheet, Pressable, View } from "react-native";
 import DeleteCourseIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import { useState } from "react";
 
-const SubjectItem = ({ id, courseId, name, status }) => {
+const SubjectItem = ({
+  id,
+  courseId,
+  name,
+  status,
+  index,
+  setSelectedSubject,
+  selectedSubject,
+}) => {
   const styles = useThemedStyles(stylesCallback);
   const color = useRandomColor(id);
   const navigation = useNavigation();
-  const [showOptions, setShowOptions] = useState(false);
+  const showOptions = index === selectedSubject;
 
   const onDeleteModal = () => {
     navigation.navigate("DeleteSubjectModal", {
       subjectId: id,
       courseId: courseId,
     });
-    setShowOptions(false);
   };
 
   return (
@@ -27,7 +34,7 @@ const SubjectItem = ({ id, courseId, name, status }) => {
         navigation.navigate("Subject", { subjectId: id, courseId: courseId });
       }}
       onLongPress={() => {
-        setShowOptions(true);
+        setSelectedSubject(index);
       }}
     >
       <StyledView

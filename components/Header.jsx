@@ -4,16 +4,10 @@ import { StyleSheet } from "react-native";
 import StyledText from "../styled_components/StyledText";
 import ProfileIcon from "react-native-vector-icons/FontAwesome5";
 
-/**
- *
- * TODO: Add styles to Header
- * RUN to test layout
- */
-
 const Header = () => {
   const styles = useThemedStyles(stylesheetCallback);
   return (
-    <StyledView bgDefault paddingDefault style={styles.headerSection}>
+    <StyledView bgDefault style={styles.headerSection}>
       <StyledView>
         <StyledText h1 bold blue>
           Stu-aid
@@ -32,11 +26,12 @@ const stylesheetCallback = (theme) =>
       color: theme.themeTokens.regularIconColor,
     },
     headerSection: {
-      marginTop: 16,
       flexDirection: "row",
       justifyContent: "space-between",
       backgroundColor: "red",
       paddingBottom: 16,
+      paddingHorizontal: 16,
+      paddingTop: 8,
       borderBottomColor: theme.themeTokens.secondaryBackgroundColor,
       borderBottomWidth: 1,
       marginBottom: 4,

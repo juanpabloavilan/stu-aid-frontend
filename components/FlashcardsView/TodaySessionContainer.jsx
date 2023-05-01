@@ -14,12 +14,11 @@ const TodaySessionContainer = () => {
     <StyledView rounded style={styles.container}>
       <Image style={styles.img} source={require("../../assets/studying.png")} />
       <StyledText h2 blue bold>
-        {" "}
         Empezar sesión de estudio
       </StyledText>
       <StyledButton
         onPress={() => {
-          navigation.navigate("Study Session");
+          navigation.navigate("Study session timer");
         }}
       >
         <PlaySessionIcon style={styles.playIcon} name="play" size={45} />

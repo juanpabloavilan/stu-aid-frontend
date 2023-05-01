@@ -9,7 +9,7 @@ const usePut = ({ url, header }) => {
 
   useEffect(() => {
     if (isExecuting) {
-      console.log({ data, loading, error });
+      console.log({ data, loading, error, url });
     }
   }, [data, loading, error]);
 

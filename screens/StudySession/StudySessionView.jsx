@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, View } from "react-native";
+import { StyleSheet, FlatList, View, Image } from "react-native";
 import React from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import useStudySession from "../../hooks/useStudySession";
@@ -9,14 +9,15 @@ import useThemedStyles from "../../hooks/useThemedStyles";
 import { useState } from "react";
 import FlashcardCard from "../../components/FlashcardsView/FlashcardCard";
 import LoadingSpinner from "../../components/LoadingSpinner";
-import { useSharedValue, withSpring } from "react-native-reanimated";
-import { useEffect } from "react";
+import { useSharedValue } from "react-native-reanimated";
 import ProgressBar from "../../components/ProgressBar";
+import SessionTimer from "../../components/SessionTimer";
 
 const StudySessionView = () => {
   const { params } = useRoute();
   const subject = params?.subject ?? null;
   const course = params?.course ?? null;
+  const timer = params?.timer ?? null;
   const navigation = useNavigation();
 
   const options = {};
@@ -52,17 +53,16 @@ const StudySessionView = () => {
     }
   };
 
-  useEffect(() => {
-    console.log("xIndex", scrollXIndexAnimated.value, data?.flashcards);
-  });
-
   return (
     <StyledView main bgDefault>
-      <GoBackIcon
-        style={styles.goBackIcon}
-        goBack={() => navigation.navigate("Home")}
-        color={styles.goBackIcon.color}
-      />
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <GoBackIcon
+          style={styles.goBackIcon}
+          goBack={() => navigation.navigate("Home")}
+          color={styles.goBackIcon.color}
+        />
+        {timer && <SessionTimer timer={timer} />}
+      </View>
 
       {loading && <LoadingSpinner />}
 
@@ -115,7 +115,11 @@ const StudySessionView = () => {
       )}
 
       {!loading && data?.flashcards.length === 0 && (
-        <StyledView main paddingDefault>
+        <StyledView main paddingDefault alignCenter justifyCenter>
+          <Image
+            style={styles.img}
+            source={require("../../assets/positive-vote.png")}
+          />
           <StyledText h2 bold>
             No tienes flashcards para repasar
           </StyledText>
@@ -129,6 +133,11 @@ export default StudySessionView;
 
 const stylesCallback = (theme) =>
   StyleSheet.create({
+    img: {
+      height: 300,
+      width: 300,
+      marginBottom: 16,
+    },
     goBackIcon: {
       color: theme.themeTokens.regularIconColor,
     },

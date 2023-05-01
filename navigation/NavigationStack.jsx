@@ -19,8 +19,8 @@ import TrueFalseQuestion from "../screens/Flashcards/TrueFalseQuestion";
 import ElaboratedQuestion from "../screens/Flashcards/ElaboratedQuestion";
 import DeleteFlashcardModal from "../screens/Flashcards/DeleteFlashcardModal";
 import StudySessionView from "../screens/StudySession/StudySessionView";
-import { View } from "react-native";
 import SessionCompleted from "../screens/StudySession/SessionCompleted";
+import TimerModal from "../screens/StudySession/TimerModal";
 
 const Stack = createStackNavigator();
 const NavigationStack = () => {
@@ -77,6 +77,7 @@ const NavigationStack = () => {
               name="DeleteFlashcardModal"
               component={DeleteFlashcardModal}
             />
+            <Stack.Screen name="Study session timer" component={TimerModal} />
           </Stack.Group>
         </Stack.Navigator>
       </>

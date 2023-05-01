@@ -6,12 +6,20 @@ import CourseItem from "./CourseItem";
 import { useNavigation } from "@react-navigation/native";
 import useThemedStyles from "../hooks/useThemedStyles";
 import StyledView from "../styled_components/StyledView";
+import { useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
 const CourseList = ({ courses }) => {
   const navigation = useNavigation();
   const styles = useThemedStyles(stylesCallback);
 
-  console.log(courses);
+  const [selectedCourse, setSelectedCourse] = useState(-1);
+  useFocusEffect(
+    useCallback(() => {
+      setSelectedCourse(-1);
+    }, [])
+  );
 
   const courseSections = [
     {
@@ -37,7 +45,14 @@ const CourseList = ({ courses }) => {
         }
         sections={courseSections}
         keyExtractor={(item) => item.id}
-        renderItem={({ item }) => <CourseItem {...item} />}
+        renderItem={({ item, index }) => (
+          <CourseItem
+            {...item}
+            index={index}
+            selectedCourse={selectedCourse}
+            setSelectedCourse={setSelectedCourse}
+          />
+        )}
         renderSectionHeader={({ section: { title } }) => (
           <View style={styles.sectionTitle}>
             <StyledText h4>{title}</StyledText>

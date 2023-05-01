@@ -13,7 +13,11 @@ const NavigationTab = () => {
   const styles = useThemedStyles(stylesCallback);
   return (
     <Tab.Navigator
-      screenOptions={{ headerShown: false, tabBarHideOnKeyboard: true }}
+      screenOptions={{
+        headerShown: false,
+        tabBarHideOnKeyboard: true,
+        tabBarStyle: styles.bar,
+      }}
     >
       <Tab.Screen
         name="Courses"
@@ -51,8 +55,10 @@ const NavigationTab = () => {
 
 const stylesCallback = (theme) =>
   StyleSheet.create({
-    tabBarStyle: {
+    bar: {
       backgroundColor: theme.themeTokens.backgroundColor,
+      color: theme.themeTokens.colors.blue,
+      borderTopWidth: 0,
     },
   });
 

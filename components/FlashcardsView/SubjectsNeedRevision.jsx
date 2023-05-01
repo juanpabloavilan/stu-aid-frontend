@@ -5,9 +5,21 @@ import StyledView from "../../styled_components/StyledView";
 import useFetchSubjectsToReview from "../../hooks/useFetchSubjectsToReview";
 import LoadingSpinner from "../LoadingSpinner";
 import SubjectToReviewItem from "../StudySession/SubjectToReviewItem";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback } from "react";
 
 const SubjectsNeedRevision = () => {
   const { loading, error, data, execute } = useFetchSubjectsToReview();
+
+  useFocusEffect(
+    useCallback(() => {
+      const fetchSubjects = async () => {
+        await execute();
+      };
+      fetchSubjects();
+      return () => console.log("Cleaning effect");
+    }, [])
+  );
 
   return (
     <>

@@ -9,7 +9,7 @@ import Animated, {
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import ScoreBoard from "./ScoreBoard";
+import ScoreBoard from "./BackAnswerBoard";
 
 const { width, height } = Dimensions.get("window");
 
@@ -29,7 +29,7 @@ const FlashcardCard = ({
     const translateXValue = interpolate(
       scrollXIndexAnimated.value,
       inputRange,
-      [50, 0, -400]
+      [CARD_WIDTH / 6, 0, -CARD_WIDTH - 100]
     );
 
     const scaleValue = interpolate(
@@ -53,7 +53,7 @@ const FlashcardCard = ({
           scale: withSpring(scaleValue, { duration: 1000 }),
         },
       ],
-      opacity: withTiming(opacityValue),
+      opacity: withSpring(opacityValue),
     };
   });
 
@@ -65,7 +65,7 @@ const FlashcardCard = ({
     return {
       transform: [
         {
-          rotateY: withSpring(`${rotateValue}deg`, { duration: 1000 }),
+          rotateY: withTiming(`${rotateValue}deg`, { duration: 1000 }),
         },
       ],
     };
@@ -76,7 +76,7 @@ const FlashcardCard = ({
     return {
       transform: [
         {
-          rotateY: withSpring(`${rotateValue}deg`, { duration: 1000 }),
+          rotateY: withTiming(`${rotateValue}deg`, { duration: 1000 }),
         },
       ],
     };
@@ -87,7 +87,7 @@ const FlashcardCard = ({
     return {
       transform: [
         {
-          rotateY: withSpring(`${rotateValue}deg`, { duration: 1000 }),
+          rotateY: withTiming(`${rotateValue}deg`, { duration: 1000 }),
         },
       ],
     };
@@ -110,14 +110,19 @@ const FlashcardCard = ({
             <FrontCard flashcard={flashcard} rotate={rotateFlashcard} />
           </Animated.View>
           <Animated.View style={[styles.backCard, backAnimatedStyles]}>
-            <BackCard flashcard={flashcard} rotate={rotateFlashcard} />
+            <BackCard
+              flashcard={flashcard}
+              rotate={rotateFlashcard}
+              nextCard={nextCard}
+              index={index}
+            />
           </Animated.View>
         </View>
-        <Animated.View
+        {/* <Animated.View
           style={[styles.answerOptions, answerOptionsAnimatedStyles]}
         >
           <ScoreBoard nextCard={nextCard} flashcard={flashcard} index={index} />
-        </Animated.View>
+        </Animated.View> */}
       </Animated.View>
     </View>
   );
@@ -131,7 +136,6 @@ const styles = StyleSheet.create({
     left: -CARD_WIDTH / 2,
     width: CARD_WIDTH,
     height: CARD_HEIGHT,
-    backgroundColor: "white",
   },
 
   frontCard: {
