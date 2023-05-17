@@ -24,7 +24,7 @@ const BackCard = ({ flashcard, rotate, nextCard, index }) => {
     elaborated: payload.back.answer,
   };
   return (
-    <>
+    <View>
       <Pressable onPress={rotate}>
         <StyledView bgSecondary rounded style={styles.card}>
           <View style={styles.labelContainer}>
@@ -56,7 +56,7 @@ const BackCard = ({ flashcard, rotate, nextCard, index }) => {
         nextCard={nextCard}
         index={index}
       />
-    </>
+    </View>
   );
 };
 
